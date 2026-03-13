@@ -1,12 +1,13 @@
-# The Structural problems AI introduces into the SDLC
+# The structural problems AI introduces into the SDLC
 
-<img src="./../Images/AI_issues_vs_SDLC.png" alt="AI issues vs SDLC" width="600"  style="float: right; margin-left: 10px;">
+<img src="./../Images/AI_issues_vs_SDLC.png" alt="AI issues vs SDLC" width="600"  style="float: right; margin-left: 10px;"> 
 
 > Traditional methodologies such as Scrum, DevOps, and the principles behind the Agile Manifesto were designed for a world where:
 > - humans wrote the code,
 > - software behaviour was largely deterministic,
 > - system complexity grew gradually.
-> 
+
+> [!IMPORTANT]
 > **AI changes all three assumptions.**
 
 ## 1. Code Production Becomes Asymmetric
@@ -21,8 +22,9 @@
 - Thousands of lines can be generated quickly.
 - Entire modules, tests, and infrastructure may be created in minutes.
 
-**The result:**
-- Code production now scales faster than human review capacity.
+> [!WARNING]
+> **The result:**
+> 🚧 Code production now scales faster than human review capacity.
 
 **This creates new risks:**
 - subtle logic flaws
@@ -61,11 +63,9 @@ Example:
 - training contamination
 - hallucination
 
-Classic Agile practices assume that:
-- **passing tests = system correctness.**
-
-But for ML and LLM systems:
-- **tests alone cannot guarantee correctness.**
+> 🚧 [!WARNING]
+> 1. Classic Agile practices assume that: **passing tests = system correctness.**
+> 2. But for ML and LLM systems: **tests alone cannot guarantee correctness.**
 
 ### Why AVC addresses it?
 
@@ -75,12 +75,14 @@ New validation mechanisms appear:
 - continuous validation
 - observability-driven metrics
 
+> [!INFO]
 > These principles extend Agile quality practices into statistical systems engineering.
 
 
 ## 3. Architectural Drift Accelerates
 
 ### The problem
+
 **AI tools can generate code without deep architectural awareness.**
 
 Even when code compiles and passes tests, it may:
@@ -90,11 +92,13 @@ Even when code compiles and passes tests, it may:
 - break system invariants
 This produces architectural entropy.
 
-> Traditional Agile allowed architecture to emerge from team collaboration.
+> [!NOTE]
+> 🛑 Traditional Agile allowed architecture to emerge from team collaboration.
 
-But with AI generation:
-- **architecture must guide generation explicitly**
-- otherwise systems degrade rapidly.
+> [!WARNING]
+> 👍 But with AI generation:
+> - **architecture must guide generation explicitly**
+> - otherwise systems degrade rapidly.
 
 ### Why AVC addresses it?
 
@@ -109,25 +113,24 @@ Key principles enforce architectural stability:
 ## 4. Organisations Mistake Velocity for Progress
 
 ### The problem
-> AI dramatically increases visible output:
-> - more code
-> - faster commits
-> - more features generated
 
-**But speed can mask problems:**
-- unvalidated assumptions
-- hidden statistical errors
-- unstable infrastructure
-- rising operational costs
+AI dramatically increases visible output:
+- more code
+- faster commits
+- more features generated
 
-Without strong feedback loops, organisations enter:
-- **certainty theatre**
+> [!WARNING]
+> **❗️ But speed can mask problems:**
+> - unvalidated assumptions
+> - hidden statistical errors
+> - unstable infrastructure
+> - rising operational costs
 
-> They believe delivery is improving while risk accumulates.
-
-> This already happened with Agile in many enterprises.
-
-> **AI accelerates the problem.**
+> ❗️[!WARNING]
+> Without strong feedback loops, organisations enter **certainty theatre**.
+> - They believe delivery is improving while risk accumulates.
+> - This already happened with Agile in many enterprises.
+> - **AI accelerates the problem.**
 
 ### Why AVC addresses it?
 
@@ -138,6 +141,7 @@ Without strong feedback loops, organisations enter:
 - protection against control traps
 - organisational responsiveness as the key metric
 
+> [!NOTE]
 > This shifts the focus from output to validated outcomes.
 
 
@@ -155,16 +159,16 @@ AI shifts the cost structure toward:
 - infrastructure
 - validation systems
 
+> [!NOTE]
 > This changes engineering priorities.
 > **The biggest cost risk is no longer writing code.**
+> It becomes: **operating complex AI systems safely.**
 
-It becomes:
-- **operating complex AI systems safely.**
-
-> **Frameworks like AVC explicitly integrate economic governance.**
+**Frameworks like AVC explicitly integrate economic governance.**
 
 ### 2. The Feedback Loop Becomes the Most Valuable Asset
 
+> [!NOTE]
 > **The organisations that win are not the ones that plan best.**
 > **They are the ones that learn fastest.**
 
@@ -180,6 +184,7 @@ This is why AVC emphasises:
 - validation
 - responsiveness
 over prediction and planning.
+
 
 ### 3. Engineering Governance Must Catch Up with Automation
 
@@ -197,6 +202,7 @@ This requires new governance structures:
 - architecture guardrails
 - adversarial testing
 
+> [!NOTE] 
 > **Frameworks like AVC formalise machine-assisted engineering governance**.
 
 ## What This Means for the Future of Software Engineering
@@ -218,11 +224,10 @@ AVC fits into the emerging stage where:
 
 ## The Core Shift
 
-Traditional software engineering optimised:
-- productivity
-
-Next-generation engineering will optimise:
-- controlled adaptability
+> [!IMPORTANT]
+> Traditional software engineering optimised productivity.
+>
+> Next-generation engineering will optimise controlled adaptability.
 
 That means:
 - faster learning
@@ -230,6 +235,7 @@ That means:
 - resilient architecture
 - measurable outcomes
 
+> [!WARNING]
 > **Frameworks like Agile Vibe Coding emerge because the engineering environment has fundamentally changed.**
 
 
