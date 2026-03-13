@@ -101,7 +101,8 @@ A common pattern appears in many organisations:
 4 Delivery becomes less responsive.
 5 Agile gets blamed for not delivering certainty.
 
-> ⚠️ But Agile didn’t fail. It was turned into a certainty machine — and judged for not being one. That’s like buying an umbrella and complaining it doesn’t stop the rain.
+> [!IMPORTANT]
+> But Agile didn’t fail. It was turned into a certainty machine — and judged for not being one. That’s like buying an umbrella and complaining it doesn’t stop the rain.
 
 ## Why AI amplifies this problem?
 
@@ -122,9 +123,13 @@ Without the right controls, organisations either:
 
 ## The Core Evolution
 
+> [!IMPORTANT]
 > Clasic Agile (2001): **Build software faster while staying flexible.**
 > AI-era engineering: **Build software faster without losing control of complexity.**
-That requires a new capabilities. The Agile Vibe Coding (AVC) framework extends Agile to address these new realities.
+> That requires a new capabilities. 
+
+> [!IMPORTANT]
+> The Agile Vibe Coding (AVC) framework extends Agile to address these new realities.
 
 ### Capability 1 — AI-Safe Architecture
 

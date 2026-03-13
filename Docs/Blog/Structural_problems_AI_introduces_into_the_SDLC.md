@@ -63,9 +63,9 @@ Example:
 - training contamination
 - hallucination
 
-> 🚧 [!WARNING]
+> [!WARNING]
 > 1. Classic Agile practices assume that: **passing tests = system correctness.**
-> 2. But for ML and LLM systems: **tests alone cannot guarantee correctness.**
+> 2. 🚧 But for ML and LLM systems: **tests alone cannot guarantee correctness.**
 
 ### Why AVC addresses it?
 
@@ -75,7 +75,7 @@ New validation mechanisms appear:
 - continuous validation
 - observability-driven metrics
 
-> [!INFO]
+> [!NOTE]
 > These principles extend Agile quality practices into statistical systems engineering.
 
 
@@ -92,12 +92,12 @@ Even when code compiles and passes tests, it may:
 - break system invariants
 This produces architectural entropy.
 
-> [!NOTE]
+> [!CAUTION]
 > 🛑 Traditional Agile allowed architecture to emerge from team collaboration.
 
 > [!WARNING]
-> 👍 But with AI generation:
-> - **architecture must guide generation explicitly**
+> But with AI generation:
+> - **architecture must guide generation explicitly** 
 > - otherwise systems degrade rapidly.
 
 ### Why AVC addresses it?
@@ -120,13 +120,13 @@ AI dramatically increases visible output:
 - more features generated
 
 > [!WARNING]
-> **❗️ But speed can mask problems:**
+> **But speed can mask problems:**
 > - unvalidated assumptions
 > - hidden statistical errors
 > - unstable infrastructure
 > - rising operational costs
 
-> ❗️[!WARNING]
+> [!WARNING]
 > Without strong feedback loops, organisations enter **certainty theatre**.
 > - They believe delivery is improving while risk accumulates.
 > - This already happened with Agile in many enterprises.

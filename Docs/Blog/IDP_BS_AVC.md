@@ -30,12 +30,12 @@ At the same time, responsibilities such as:
 - generating responses for end users
 belong to the **Business Services team**.
 
-> ❗️[!ERROR]
-> If someone sees only a change of team names in this proposal and not a qualitative shift in how software is developed, I respectfully disagree.
+> [!CAUTION]
+> ❗️If someone sees only a change of team names in this proposal and not a qualitative shift in how software is developed, I respectfully disagree.
 
 Put simply, the **Internal Development Platform team** builds and maintains the infrastructure that enables software delivery. This interdisciplinary team may include DevOps engineers, security and quality specialists, developers, product managers, and cloud, database, and platform administrators. Their mission is to create and maintain the environment that allows software to be reliably built, tested, and deployed across any hardware platform.
 
-> [!INFO]
+> [!NOTE]
 > Continuous integration and deployment in such environments requires strong use of **Infrastructure as Code (IaC)**, and the presence of experienced developers inside the IDP team becomes essential for many complex applications.
 
 ### BS team
@@ -48,9 +48,9 @@ AI systems can already generate significant portions of application logic. Howev
 
 This is why the Business Services team must remain diverse and multidisciplinary. Without deep domain knowledge and well-defined requirements, neither humans nor intelligent systems can produce reliable solutions.
 
-> ❗️[!WARNING]
+> [!WARNING]
 > At the intersection of humans and AI, one principle remains unchanged: **garbage in — garbage out**.
-> In fact, in AI-driven systems the effect can be even stronger: **garbage in — amplified garbage out**.
+> ❗In fact, in AI-driven systems the effect can be even stronger: **garbage in — amplified garbage out**.
 
 Many high-profile software failures are not simply technical problems. They often originate from **overestimating our own understanding**. Too often we assume that requirements are “obvious” and that not everything needs to be clearly defined.
 
