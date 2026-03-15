@@ -227,3 +227,5 @@ If fully realized, this becomes
 - Adaptive Levels = Market scalability mechanism
 - Positioning = Governance OS for AI software
 - Economic effect = Validation becomes more valuable than generation
+
+[Agile Vibe Coding Manifesto](https://agilevibecoding.org/)
