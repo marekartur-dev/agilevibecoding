@@ -1,6 +1,8 @@
 # Deterministic Developers in a Non-Deterministic World
 ___Some Dilemmas of Deterministic Software Developers___
 
+<img src="./../Images/Building_trust_in_AI_systems.png" alt="AI system trust" height="600"  style="float: right; margin-left: 10px;">
+
 Lately, many of my posts have been full of lists, bullet points, and structured arguments. This time, I’d like to try something different: a story.
 
 Someone might be tempted to comment “papa, don’t preach” and suggest saving reflections like these for the grandchildren. Perhaps. But my goal is not to lecture. My goal is to place an important discussion into the right context.
