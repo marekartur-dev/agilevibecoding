@@ -131,27 +131,33 @@ Automated checks must detect unintended deviations before they accumulate into s
 Applies to cloud architecture, model usage, and scaling decisions.  
 Innovation must be cost-aware. Compute, retraining cadence, and storage growth require governance.
 
+## 22. Organizational Architecture Mirrors System Architecture
+
+Team communication structures must align with architectural boundaries.
+Platform teams provide shared capabilities; business teams own domain services.
+AI generation must operate within these boundaries.
+
 # V. HUMAN SYSTEM
 
-# 22. Dual-Mode Review
+# 23. Dual-Mode Review
 
 Applies to peer review structure.  
 Functional correctness and adversarial analysis must be separated.  
 No author reviews their own critical work in isolation.
 
-## 23. Sustainable Pace for Humans and Systems
+## 24. Sustainable Pace for Humans and Systems
 
 Applies to cognitive load, iteration cadence, and operational scaling.  
 Prevent burnout, prompt churn, compute excess, and architectural entropy.  
 Sustainability is both human and technical.
 
-## 24. Human–AI Retrospection
+## 25. Human–AI Retrospection
 
 Applies to continuous improvement.  
 Regularly assess collaboration quality, review discipline, and bias exposure (automation bias, plausibility bias, anchoring, authority bias).  
 Confidence is not evidence.
 
-## 25. Organisational Responsiveness Is the Ultimate Metric
+## 26. Organisational Responsiveness Is the Ultimate Metric
 
 Applies to leadership evaluation and cultural health.  
 The system succeeds when it can notice change early and adapt without drama.  
