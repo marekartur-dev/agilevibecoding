@@ -1,7 +1,7 @@
 # Using a .NET 10 migration project to prove Conway’s Law in AI-Driven engineering - example 2
 
 
-img src="./../Images/Proof_of_Conway_migration.png" alt="AVC .Net10 migration & Conway Law" height="400"  style="float: right; margin-left: 10px;">
+<img src="./../Images/Proof_of_Conway_migration.png" alt="AVC .Net10 migration & Conway Law" height="400"  style="float: right; margin-left: 10px;">
 
 > To convincingly demonstrate the effective use of Agile methodology when building software with AI, we need an example that:
 > - is complex enough to demonstrate the Conway effect,
@@ -240,7 +240,7 @@ Teams → services → APIs → clean graph
 > 
 > “We upgraded to .NET 10”
 > 
-The proof comes from:
+> The proof comes from:
 > 
 > “During the upgrade, we enforced AVC governance and observed Conway alignment emerge.”
 
