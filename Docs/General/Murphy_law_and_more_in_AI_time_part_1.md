@@ -357,7 +357,7 @@ If we combine all of these:
 
 ### See also:
 - [Agile Vibe Coding Manifesto](https://agilevibecoding.org/)
-- [Murphy’s law and more in AI time - turn into something we can use]()
+- [Murphy’s law and more in AI time - turn into something we can use](https://www.linkedin.com/pulse/murphys-law-more-ai-time-turn-something-we-can-use-marek-kubis-4jike/?trackingId=gtLuYAdao3jp%2Bdghr%2BKTug%3D%3D)
 - [The Agile Vibe Coding and Conway's Law](https://www.linkedin.com/pulse/agile-vibe-coding-conways-law-marek-kubis-m0wpe/?trackingId=wNYc5fRxyx3oQGxE3KYx8Q%3D%3D)
 - [Using a digital banking solution to prove Conway’s Law in AI-Driven engineering - example 1](https://www.linkedin.com/pulse/using-digital-banking-solution-prove-conways-law-ai-driven-kubis-xqlre/)
 - [Using a .NET 10 migration project to prove Conway’s Law in AI-Driven engineering - example 2](https://www.linkedin.com/pulse/using-net-10-migration-project-prove-conways-law-ai-driven-kubis-abqae/?trackingId=%2FAxxEBhQ3Kz4dbLMKDokgg%3D%3D)
