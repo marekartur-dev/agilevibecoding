@@ -3,7 +3,8 @@
 
 <img src="./../Images/Whimsical software development machine in action.png" alt="Rune Goldberg machine and AVC" height="400"  style="float: right; margin-left: 10px;">
 
-> Let me discuss a select set of the most relevant “laws” from this list, focusing on today’s software engineering, CI/CD, cloud, distributed systems, and AI-assisted coding.
+> Let me discuss a select set of the most relevant “laws” from the [list of eponymous laws](https://en.wikipedia.org/wiki/List_of_eponymous_laws), 
+> focusing on today’s software engineering, CI/CD, cloud, distributed systems, and AI-assisted coding.
 > 
 > I think that anyone who has been programming for a while will be able to confirm the truth of these laws also using their own practical examples.
 
@@ -356,6 +357,7 @@ If we combine all of these:
 
 ### See also:
 - [Agile Vibe Coding Manifesto](https://agilevibecoding.org/)
+- [Murphy’s law and more in AI time - turn into something we can use]()
 - [The Agile Vibe Coding and Conway's Law](https://www.linkedin.com/pulse/agile-vibe-coding-conways-law-marek-kubis-m0wpe/?trackingId=wNYc5fRxyx3oQGxE3KYx8Q%3D%3D)
 - [Using a digital banking solution to prove Conway’s Law in AI-Driven engineering - example 1](https://www.linkedin.com/pulse/using-digital-banking-solution-prove-conways-law-ai-driven-kubis-xqlre/)
 - [Using a .NET 10 migration project to prove Conway’s Law in AI-Driven engineering - example 2](https://www.linkedin.com/pulse/using-net-10-migration-project-prove-conways-law-ai-driven-kubis-abqae/?trackingId=%2FAxxEBhQ3Kz4dbLMKDokgg%3D%3D)

@@ -3,7 +3,7 @@
 > - Practical rules that we can enforce in a real team - especially important in the case of an Azure + distributed system configuration.
 > - Engineering Rules mapped to SDLC and Agile.
 
-### 👉 *The key shift*: **AI compresses Implementation—but stretches every other phase if unmanaged.**
+### 👉 *The key shift*: **AI compresses Implementation — but stretches every other phase if unmanaged.**
 
 <hr />
 
