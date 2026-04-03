@@ -26,6 +26,9 @@ The new methodology and AI are intended to be a tool for software engineers that
 and improves the application of existing best practices, design patterns, and design principles, 
 not a replacement for them.
 
+Achieving business goals, such as generating profit, achieving market share, etc., 
+are not goals for Agile Vibe Coding, but rather one of many requirements represented by pre-defined boundaries.
+
 ### Goals
 
 - To empower software engineers to harness AI as a force multiplier for craftsmanship, creativity, 
