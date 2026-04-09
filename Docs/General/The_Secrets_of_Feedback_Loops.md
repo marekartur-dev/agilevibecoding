@@ -91,7 +91,8 @@ In many organizations, only leadership has the authority to say:
 
 > “Stop. Observe. Investigate.”
 
-Technology alone will not solve this. Effective feedback loops require organizational discipline, as seen in frameworks like ISO 9001 or the Toyota Production System.
+Technology alone will not solve this. Effective feedback loops require organizational discipline, 
+as seen in frameworks like ISO 9001 or the Toyota Production System.
 
 
 ## Software Development Lifecycle Management, SDLC
