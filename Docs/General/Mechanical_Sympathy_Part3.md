@@ -44,15 +44,15 @@ Importance: ✅ Common (High impact, should be default focus)
 - Use asynchronous programming with async/await to improve responsiveness and scalability of C# applications, especially for I/O-bound operations.
 - Limit the number of concurrent operations. Without limiting concurrency, many tasks will run simultaneously, which can lead to heavy load and degraded overall performance. 
   Bad way:
-  ```
+```
     public async Task ProcessManyItems(List<string> items)
     {
         var tasks = items.Select(async item => await ProcessItem(item));
         await Task.WhenAll(tasks);
     }
-  ```
+```
   Good way:
-  ```
+```
     public async Task ProcessManyItems(List<string> items, int maxConcurrency = 10)
     {
         using (var semaphore = new SemaphoreSlim(maxConcurrency))
@@ -73,17 +73,17 @@ Importance: ✅ Common (High impact, should be default focus)
             await Task.WhenAll(tasks);
         }
     }
-  ```
+```
 - Use ConfigureAwait(false) when possible to avoid unnecessary context switching and can help prevent deadlocks 
   in our async code and improve efficiency by not forcing continuations to run on the original synchronization context.
   Avoid potential deadlocks example:
-  ```
+```
     public async Task<string> LoadDataAsync()
     {
         var data = await ReadDataAsync().ConfigureAwait(false); 
         return ProcessData(data);
     }
-  ```
+```
 
 ## Parallelism (CPU-bound work)
 ```
@@ -105,7 +105,7 @@ Importance: ✅ Common
 - Implement data caching with in-memory cache or distributed cache (like Redis) to reduce latency and improve performance for frequently accessed data. 
   Caching can significantly speed up data retrieval and reduce load on databases or external services.
   In-memory cache example:
-  ```
+```
     private readonly IMemoryCache _cache;
     public MyService(IMemoryCache cache)
     {
@@ -120,9 +120,9 @@ Importance: ✅ Common
         }
         return data;
     }
-  ```
+```
   Redis cache example:
-  ```
+```
     private readonly IDistributedCache _cache;
     public MyService(IDistributedCache cache)
     {
@@ -141,7 +141,7 @@ Importance: ✅ Common
         }
         return data;
     }
-  ```
+```
 
 ## Concurrency and Thread Safety (shared state)
 ```
@@ -152,7 +152,7 @@ Importance: ⚠️ Situational
 - Use lock-free data structures when possible to reduce contention and improve performance in concurrent scenarios. 
   Lock-free data structures can help avoid bottlenecks and improve scalability in multi-threaded applications.
   Example of using ConcurrentQueue:
-  ```
+```
     private readonly ConcurrentQueue<string> _queue = new ConcurrentQueue<string>();
     public void Enqueue(string item)
     {
@@ -162,11 +162,11 @@ Importance: ⚠️ Situational
     {
         return _queue.TryDequeue(out item); // Thread-safe dequeue operation.
     }
-  ```
+```
 - Use efficient synchronization constructs like SemaphoreSlim, ReaderWriterLockSlim, Monitor, or ConcurrentDictionary to manage access to shared resources without causing excessive blocking or contention. 
   These constructs can help improve performance by allowing multiple threads to access resources concurrently while still ensuring thread safety.
   Example of using `lock` on bad way:
-  ```
+```
     // The `lock` keyword is used again for synchronization. 
     // Lock is simple and correct, but may become a bottleneck under high contention.
 
@@ -180,9 +180,9 @@ Importance: ⚠️ Situational
             _list.Add(item);
         }
     }
-  ```
+```
   Example of proper using ReaderWriterLockSlim:
-  ```
+```
     private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
     private string _sharedResource;
     
@@ -211,10 +211,10 @@ Importance: ⚠️ Situational
             _lock.ExitReadLock(); // Ensure the lock is released even if an exception occurs.
         }
     }
-  ```
+```
 - Employ the Interlocked class for atomic operations on shared state without relying on locks, reducing contention and improving performance.
   Example of incorrect atomic increment that can result in contention and performance degradation:
-  ```
+```
     private int _counter;
     private readonly object _syncRoot = new object();
 
@@ -225,9 +225,9 @@ Importance: ⚠️ Situational
             _counter++;
         }
     }
-  ```
+```
   Example of proper using Interlocked for atomic increment:
-  ```
+```
     private long _counter;
     
     public void Increment()
@@ -239,7 +239,7 @@ Importance: ⚠️ Situational
     {
         return Interlocked.Read(ref _counter); // Atomically reads the counter value.
     }
-  ```
+```
 
 ## LINQ Performance Optimization
 ```
@@ -251,45 +251,45 @@ Importance: ✅ Common
   Deferred execution can lead to multiple enumerations of the same collection, 
   while immediate execution can help improve performance by materializing the results when needed.
   Example of deferred execution that can lead to performance issues:
-  ```
+```
     var query = myCollection.Where(x => x.IsActive); // Deferred execution, query is not executed until enumerated.
     foreach (var item in query)
     {
         // Each enumeration will execute the query again, which can lead to performance issues.
     }
-  ```
+```
   Example of immediate execution that can improve performance:
-  ```
+```
     var activeItems = myCollection.Where(x => x.IsActive).ToList(); // Immediate execution, results are materialized in a list.
     foreach (var item in activeItems)
     {
         // The query is executed only once, and the results are stored in memory for efficient access.
     }
-  ```
+```
 - Prefer the syntax (LINQ query or method) that improves readability for your team.
   Complex transformations are often clearer with query syntax, while simple pipelines 
   are usually more concise with method syntax.
   Example of using LINQ query syntax:
-  ```
+```
     var activeItems = from item in myCollection
                       where item.IsActive
                       select item; // LINQ query syntax for better readability.
-  ```
+```
   Example of using LINQ method syntax:
-  ```
+```
     var activeItems = myCollection.Where(x => x.IsActive); // LINQ method syntax, which can be less readable for complex queries.
-  ```
+```
 - Be aware of potential pitfalls when using LINQ in a multithreaded environment to avoid issues with thread safety and performance bottlenecks. 
   Bad way, multiple threads enumerating the same `IEnumerable` resulting from a LINQ query, which may lead to unpredictable behavior:
-  ```
+```
     Parallel.ForEach(items, item =>
     {
         var matchingItems = items.Where(i => i.Name == item.Name);
         Process(matchingItems);
     });
-  ```
+```
   Good way, materializing the results of the LINQ query into a thread-safe collection before processing:
-  ```
+```
     var itemGroups = items.GroupBy(i => i.Name).ToDictionary(g => g.Key, g => g.ToList()); // Materialize groups into a dictionary for thread-safe access.
     Parallel.ForEach(items, item =>
     {
@@ -298,7 +298,7 @@ Importance: ✅ Common
             Process(matchingItems); // Process the matching items safely in a multithreaded environment.
         }
     });
-  ```
+```
 
 ## JIT Compilation
 ```
@@ -309,7 +309,7 @@ Importance: 🚫 Rare
 - Perform loop unrolling for better performance in performance-critical sections of code, but be cautious of code readability and maintainability. 
   Loop unrolling can help reduce the overhead of loop control and improve performance, but it can also make the code more complex and harder to understand.
   Example of loop unrolling:
-  ```
+```
     for (int i = 0; i < items.Length; i += 4)
     {
         Process(items[i]);
@@ -317,19 +317,19 @@ Importance: 🚫 Rare
         if (i + 2 < items.Length) Process(items[i + 2]);
         if (i + 3 < items.Length) Process(items[i + 3]);
     }
-  ```
+```
   - Utilize the aggressive inlining attribute for critical methods to reduce method call overhead and improve performance, 
     but be mindful of the potential increase in code size. 
     Aggressive inlining can help improve performance by eliminating the overhead of method calls, 
     but it can also lead to larger code size, which may negatively impact cache performance.
     Example of instructing the JIT compiler to improve performance by reducing the overhead of method call:
-    ```
+  ```
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     void ProcessItem(Item item)
     {
         // Method implementation
     }
-    ```
+  ```
 
 ## Stack and Heap Allocation
 ```
@@ -340,7 +340,7 @@ Importance: ⚠️ Situational
 - Limit the use of heap-allocated objects when possible to reduce garbage collection overhead and improve performance. 
   Heap allocation can lead to increased memory usage and more frequent garbage collection, which can degrade performance.
   Bad way example of heap allocation:
-  ```
+```
     // This method creates a new string object on the heap for each call, 
     // which can lead to increased memory usage and garbage collection overhead.
 
@@ -348,9 +348,9 @@ Importance: ⚠️ Situational
     {
         return new string($"Item{index}".ToCharArray());
     }
-  ```
+```
   Good way example of heap allocation:
-  ```
+```
     // By returning the interpolated string directly, we avoid unnecessary extra allocations 
     // (like creating a char array), but the string itself is still allocated on the heap 
     // and reduce the overhead provided by garbage collection.
@@ -359,9 +359,9 @@ Importance: ⚠️ Situational
     {
         return $"Item{index}";
     }
-  ```
+```
   Example of limiting heap allocation by using value types:
-  ```
+```
     struct Point
     {
         public int X { get; }
@@ -372,12 +372,12 @@ Importance: ⚠️ Situational
             Y = y;
         }
     }
-  ```
+```
 - Use stackalloc keyword for memory allocation on the stack for small, short-lived data structures to improve performance and reduce garbage collection overhead. 
   Stack allocation can help improve performance by avoiding heap allocation and reducing the frequency of garbage collection, 
   but it should be used with caution to avoid stack overflow exceptions.
   Example of using stackalloc for small arrays:
-  ```
+```
     public void ProcessData(int size)
     {
         // Use stackalloc for small arrays, fallback to heap allocation for larger sizes.
@@ -385,7 +385,7 @@ Importance: ⚠️ Situational
 
         // Process the data...
     }
-  ```
+```
 
 ## Efficient Data Structures and Algorithms
 ```
@@ -396,7 +396,7 @@ Importance: ✅ Common (High impact, should be default focus)
 - Choose the right data structure for your needs to optimize performance and memory usage. 
   For example, use a Dictionary for fast lookups, a List for dynamic arrays, or a LinkedList for efficient insertions and deletions.
   Example of choosing the right data structure:
-  ```
+```
     // Using a Dictionary for fast lookups by key.
     var dictionary = new Dictionary<string, int>();
     dictionary["key1"] = 1;
@@ -408,14 +408,14 @@ Importance: ✅ Common (High impact, should be default focus)
 
     // Selecting a HashSet instead of a List offers faster look-up times and greater performance.
     HashSet<int> userList = new HashSet<int>();
-  ```
+```
 - Employ custom sorting algorithms for specific use cases to improve performance, 
   but be cautious of the complexity and maintainability of the code. 
   Relying on default sorting algorithms may not always be the best choice for specific performance-centric use cases.
   Custom sorting algorithms can help improve performance for specific scenarios, 
   but they can also be more complex and harder to maintain than built-in sorting methods.
   Example of using a custom sorting algorithm:
-  ```
+```
     public void CustomSort(int[] array)
     {
         // Implement a custom sorting algorithm (e.g., QuickSort) for better performance on specific data sets.
@@ -454,7 +454,7 @@ Importance: ✅ Common (High impact, should be default focus)
         array[i] = array[j];
         array[j] = temp;
     }
-  ```
+```
 
 ## Learn advanced data structures and algorithms to optimize performance for specific use cases
 ```
@@ -469,7 +469,7 @@ Importance: ⚠️ Situational (High impact in specialized domains)
   the traveling salesman problem, the graph coloring problem, and the Bloom filter for membership testing in a space-efficient manner, etc.
   
   Example of using a Trie for efficient prefix searching:
-  ```
+```
     public class TrieNode
     {
         public Dictionary<char, TrieNode> Children { get; } = new Dictionary<char, TrieNode>();
@@ -508,7 +508,7 @@ Importance: ⚠️ Situational (High impact in specialized domains)
             return current.IsEndOfWord;
         }
     }
-  ```
+```
 
 ## Reflection and Code Generation
 ```
@@ -519,25 +519,25 @@ Importance: 🚫 Rare
 - Avoid excessive use of Reflection APIs for performance-critical code paths, as it can lead to significant overhead and degrade performance. 
   Reflection can be useful for certain scenarios, but it should be used judiciously to avoid performance issues.
   Example of excessive use of Reflection:
-  ```
+```
     public void InvokeMethod(object obj, string methodName)
     {
         var method = obj.GetType().GetMethod(methodName); // Reflection to get method info, which can be slow.
         method.Invoke(obj, null); // Reflection to invoke the method, which can also be slow.
     }
-  ```
+```
 - Use dynamically generated lambda expressions instead of reflection for better performance when creating delegates or accessing members at runtime. 
   Dynamically generated lambda expressions can help improve performance by avoiding the overhead of reflection, 
   but they can also be more complex to implement and maintain.
   Bad way example of using reflection for property access:
-  ```
+```
     private static void SetPropertyViaReflection(object obj, PropertyInfo property, object value)
     {
         property.SetValue(obj, value);
     }
-  ```
+```
   Good way example of using dynamically generated lambda expressions instead of using reflection:
-  ```
+```
     private static void SetPropertyViaExpression(object obj, PropertyInfo property, object value)
     {
         var setter = property.SetMethod
@@ -545,9 +545,9 @@ Importance: 🚫 Rare
                              .MakeGenericType(property.DeclaringType, property.PropertyType));        
         ((dynamic)setter)(obj, value);
     }
-  ```
+```
   Another example of using dynamically generated lambda expressions:
-  ```
+```
     public Func<T, object> CreatePropertyAccessor<T>(string propertyName)
     {
         var param = Expression.Parameter(typeof(T), "x");
@@ -557,7 +557,7 @@ Importance: 🚫 Rare
         // Dynamically generate a lambda expression for property access.
         return Expression.Lambda<Func<T, object>>(convert, param).Compile(); 
     }
-  ```
+```
 
 ## Process multiple data elements in parallel
 ```
@@ -570,7 +570,7 @@ Importance: ⚠️ Situational
   SIMD can help improve performance by allowing multiple data elements to be processed simultaneously, 
   but it requires careful consideration of data alignment and may not be suitable for all scenarios.
   Example of using Vector types for SIMD processing:
-  ```
+```
     public void ProcessDataWithSIMD(float[] data)
     {
         int vectorSize = Vector<float>.Count; // Get the number of elements that can be processed in parallel.
@@ -581,11 +581,11 @@ Importance: ⚠️ Situational
             result.CopyTo(data, i); // Store the result back into the array.
         }
     }
-  ```
+```
 - Ensure compatibility with hardware-accelerated SIMD instructions by using the System.Numerics.Vectors library and checking for hardware support at runtime. 
   This can help improve performance by leveraging hardware capabilities, but it may require additional checks to ensure compatibility.
   Example of checking for hardware support for SIMD:
-  ```
+```
     public void ProcessDataWithSIMD(float[] data)
     {
         if (Vector.IsHardwareAccelerated) // Check if the hardware supports SIMD instructions.
@@ -607,7 +607,7 @@ Importance: ⚠️ Situational
             }
         }
     }
-  ```
+```
 
 ## Task and ValueTask
 ```
@@ -619,7 +619,7 @@ Importance: ⚠️ Situational
   as incorrect usage can lead to subtle bugs and worse performance.
   ValueTask is easy to misuse (multiple awaits, boxing, etc.).
   Example of using ValueTask:
-  ```
+```
     public ValueTask<string> GetDataAsync()
     {
         if (TryGetData(out var data))
@@ -631,12 +631,12 @@ Importance: ⚠️ Situational
             return new ValueTask<string>(FetchDataAsync()); // Return a ValueTask that represents an asynchronous operation.
         }
     }
-  ```
+```
 - Optimize performance with appropriate async operations by using Task for long-running operations and ValueTask 
   for short-lived operations to minimize overhead and improve responsiveness. 
   Choosing the right type of asynchronous operation can help optimize performance and improve the responsiveness of applications.
   Example of optimizing async operations:
-  ```
+```
     public async Task<string> GetDataAsync()
     {
         if (IsDataAvailable())
@@ -648,7 +648,7 @@ Importance: ⚠️ Situational
             return await FetchDataFromDatabaseAsync(); // Use asynchronous method for long-running operations.
         }
     }
-  ```
+```
 
 ## Boxing and Unboxing
 ```
@@ -659,18 +659,18 @@ Importance: ⚠️ Situational
 - Understand the cost of boxing and unboxing in C# and how it can lead to performance degradation, especially in scenarios involving value types. 
   Boxing and unboxing can lead to increased memory usage and reduced performance, so it's important to be aware of when it occurs.
   Example of boxing and unboxing:
-  ```
+```
     // Good way - avoiding unnecessary boxing and unboxing:
     int number = 42; 
 
     // Bad way - not paying attention to boxing and unboxing:
     object boxedValue = number;         // Boxing a value type (int) into an object.
     int unboxedValue = (int)boxedValue; // Unboxing the object back to a value type (int).
-  ```
+```
 - Utilize generics and custom interfaces to avoid boxing and unboxing when working with collections or APIs that involve value types. 
   Generics can help avoid boxing and unboxing by allowing you to work with value types directly, improving performance.
   Bad way - the use of object types:
-  ```
+```
     public interface INumber
     {
         object Value { get; set; }
@@ -680,9 +680,9 @@ Importance: ⚠️ Situational
     {
         public object Value { get; set; }
     }
-  ```  
+```  
   Example of using generics to avoid boxing and unboxing:
-  ```
+```
     // Using a generic List to avoid boxing and unboxing of value types.
     List<int> numbers = new List<int>(); // No boxing occurs when adding integers to the list.
     numbers.Add(42);                     // Adding an integer to the list without boxing.
@@ -700,9 +700,9 @@ Importance: ⚠️ Situational
             // Processing an integer without boxing.
         }
     }
-  ```
+```
   Good way - using generics to avoid boxing and unboxing:
-  ```
+```
     public interface INumber<T>
     {
         T Value { get; set; }
@@ -712,7 +712,7 @@ Importance: ⚠️ Situational
     {
         public T Value { get; set; }
     }
-  ```
+```
 
 ## Network Communication Optimization
 ```
@@ -723,16 +723,16 @@ Importance: ⚠️ Situational
 - Choose efficient serialisation methods (e.g., Protocol Buffers, MessagePack) for network communication to reduce payload size and improve performance. 
   Efficient serialisation can help reduce the amount of data transmitted over the network, improving performance and reducing latency.
   Example of using Protocol Buffers for efficient serialisation:
-  ```
+```
     // Define a Protocol Buffers message for efficient serialization.
     message MyData
     {
         int32 Id = 1;
         string Name = 2;
     }
-  ```
+```
   Bad way - using a slow and outdated XmlSerializer for data serialization:
-  ```
+```
     private string SerializeObjectToXml<T>(T obj)
     {
         var serializer = new XmlSerializer(typeof(T));
@@ -742,9 +742,9 @@ Importance: ⚠️ Situational
             return writer.ToString();
         }
     }
-  ```
+```
   Good way - using a modern and efficient serialiser for data serialisation:
-  ```
+```
     // Using MessagePack for efficient serialization of objects to a compact binary format.
     private byte[] SerializeObjectToMessagePack<T>(T obj)
     {
@@ -756,13 +756,13 @@ Importance: ⚠️ Situational
     {
         return JsonConvert.SerializeObject(obj);
     }
-  ```
+```
 
 - Use HttpClientFactory to manage HttpClient instances and avoid socket exhaustion issues in high-throughput applications. 
   HttpClientFactory can help improve performance and reliability by managing the lifecycle of HttpClient instances, 
   but it requires proper configuration to avoid potential issues.
   Example of using HttpClientFactory:
-  ```
+```
     public class MyService
     {
         private readonly HttpClient _httpClient;
@@ -778,7 +778,7 @@ Importance: ⚠️ Situational
             return await response.Content.ReadAsStringAsync(); // Read the response content as a string.
         }
     }
-  ```
+```
 
 ## Proper Exception Handling
 ```
@@ -789,7 +789,7 @@ Importance: ✅ Common
 - Avoid using exceptions for flow control as it can lead to performance degradation and make code harder to read and maintain. 
   Exceptions should be reserved for truly exceptional conditions, not for regular control flow.
   Bad way - using exceptions for flow control:
-  ```
+```
     public int ParseInt(string input)
     {
         try
@@ -801,9 +801,9 @@ Importance: ✅ Common
             return -1; // Return a default value on parsing failure, which is not ideal.
         }
     }
-  ```
+```
   Good way - using TryParse for better performance and readability:
-  ```
+```
     public int ParseInt(string input)
     {
         if (int.TryParse(input, out int result)) // Using TryParse to avoid exceptions for flow control.
@@ -815,13 +815,13 @@ Importance: ✅ Common
             return -1; // Return a default value on parsing failure, which is more efficient.
         }
     }
-  ```
+```
 
 - Use exception filters to minimize catch blocks and improve performance by only catching specific exceptions that you can handle, 
   while allowing other exceptions to propagate up the call stack. 
   Exception filters can help improve performance by reducing the number of catch blocks and allowing unhandled exceptions to be handled by higher-level error handling mechanisms.
   Bad way - catching all exceptions without filters:
-  ```
+```
     public void ProcessData(string input)
     {
         try
@@ -840,10 +840,10 @@ Importance: ✅ Common
             }
         }
     }
-  ```
+```
 
   Good way - catching exceptions only when a certain condition is met:
-  ```
+```
     public void ProcessData(string input)
     {
         try
@@ -856,7 +856,7 @@ Importance: ✅ Common
             Console.WriteLine($"Handled exception: {ex.Message}");
         }
     }
-  ```
+```
 
 ## Nullability & Nullable Reference Types
 ```
@@ -867,22 +867,22 @@ Importance: ✅ Common
 - Leverage null-coalescing operators (??, ??=) to provide default values and simplify null checks, improving code readability and maintainability. 
   Null-coalescing operators can help reduce the amount of boilerplate code needed for null checks, making the code cleaner and easier to read.
   Example of using null-coalescing operators:
-  ```
+```
     public string GetName(string input)
     {
         return input ?? "Default Name"; // Use null-coalescing operator to provide a default value if input is null.
     }
-  ```
+```
 
 - Use nullable reference types to avoid runtime null reference exceptions and improve code safety by explicitly indicating which reference types can be null. 
   Nullable reference types can help catch potential null reference issues at compile time, improving code safety and reducing the likelihood of runtime errors.
   Example of using nullable reference types:
-  ```
+```
     public string? GetNullableName(string input)
     {
         return string.IsNullOrEmpty(input) ? null : input; // Return null if input is null or empty, otherwise return the input.
     }
-  ```
+```
 
 ## Efficient buffer management
 ```
@@ -893,7 +893,7 @@ Importance: ⚠️ Situational
 - Know when to use Span over arrays for better performance and reduced memory allocations when working with contiguous memory regions. 
   Span can help improve performance by allowing you to work with slices of arrays or other memory buffers without creating additional allocations.
   Example of using Span for efficient buffer management:
-  ```
+```
     // byte[] data = GetData();
     // Span<byte> dataSpan = data.AsSpan();
     // ProcessData(dataSpan);
@@ -902,14 +902,14 @@ Importance: ⚠️ Situational
     {
         // Process the data in the span without creating additional allocations.
     }
-  ```
+```
 
 - Use ArrayPool to recycle temporary buffers and reduce garbage collection overhead in high-performance scenarios, 
   but be mindful of potential issues with buffer reuse and thread safety. 
   ArrayPool can help improve performance by reusing buffers, but it requires careful management 
   to avoid issues with buffer reuse and thread safety.
   Example of using ArrayPool for efficient buffer management:
-  ```
+```
     public void ProcessData(int size)
     {
         var pool = ArrayPool<byte>.Shared; // Get a shared instance of the ArrayPool.
@@ -923,7 +923,7 @@ Importance: ⚠️ Situational
             pool.Return(buffer); // Return the buffer to the pool for reuse.
         }
     }
-  ```
+```
 
 ## Lazy & Eager Loading Techniques 
 ```
@@ -935,28 +935,28 @@ Importance: ✅ Common
   Lazy loading can help improve performance by deferring the loading of resources until they are actually needed, 
   while eager loading can help reduce latency by loading resources upfront.
   Example of lazy loading:
-  ```
+```
     public class LazyLoadedResource
     {
         private readonly Lazy<ExpensiveResource> _resource = new Lazy<ExpensiveResource>(() => new ExpensiveResource());
         
         public ExpensiveResource Resource => _resource.Value; // The resource will be created only when accessed for the first time.
     }
-  ```
+```
   Example of eager loading:
-  ```
+```
     public class EagerLoadedResource
     {
         private readonly ExpensiveResource _resource = new ExpensiveResource(); // The resource is created immediately when the class is instantiated.
         
         public ExpensiveResource Resource => _resource; // The resource is already available when accessed.
     }
-  ```
+```
 
 - Implement lazy properties with the Lazy class to defer expensive computations until the value is actually needed, improving performance and reducing unnecessary work. 
   Lazy properties can help improve performance by avoiding unnecessary computations and only performing them when the value is actually needed.
   Example of implementing lazy properties with the Lazy class:
-  ```
+```
     public class MyClass
     {
         // Using Lazy<T> to initialize resources only when needed
@@ -970,7 +970,7 @@ Importance: ✅ Common
             return "Expensive Value";
         }
     }
-  ```
+```
 
 ## String Interpolation and Comparison
 ```
@@ -982,26 +982,26 @@ Importance: ⚠️ Situational
   StringComparison options can help improve performance by allowing you to specify the type of comparison to perform, 
   which can be more efficient than the default ordinal comparison in certain scenarios.
   Bad way string comparison:
-  ```
+```
     public bool AreStringsEqual(string str1, string str2)
     {
         // Allocating additional memory for string conversion before comparison
         bool equal = str1.ToLower() == str2.ToLower();
     }
-  ```  
+```  
   Example of using StringComparison for efficient string comparison:
-  ```
+```
     public bool AreStringsEqual(string str1, string str2)
     {
         // Use StringComparison for efficient and culture-insensitive comparison.
         return string.Equals(str1, str2, StringComparison.OrdinalIgnoreCase); 
     }
-  ```
+```
 
 - Opt for StringBuilder over string concatenation in loops to reduce memory allocations and improve performance when building large strings. 
   StringBuilder can help improve performance by reducing the number of intermediate string objects created during concatenation, especially in loops.
   Bad way of string concatenation in a loop:
-  ```
+```
     public string BuildString(IEnumerable<string> parts)
     {
         string result = string.Empty; // This will create a new string object on each concatenation, leading to performance issues.
@@ -1011,9 +1011,9 @@ Importance: ⚠️ Situational
         }
         return result;
     }
-  ```
+```
   Example of using StringBuilder for efficient string concatenation:
-  ```
+```
     public string BuildString(IEnumerable<string> parts)
     {
         var stringBuilder = new StringBuilder(); // Use StringBuilder to efficiently build a large string.
@@ -1023,7 +1023,7 @@ Importance: ⚠️ Situational
         }
         return stringBuilder.ToString(); // Convert the StringBuilder to a string once all parts are appended.
     }
-  ```
+```
 
 ## Optimize SQL database queries and improve performance
 ```
@@ -1034,7 +1034,7 @@ Importance: ✅ Common
 - Understanding how SQL Server processes queries, manages indexes, and handles transactions can help you write more efficient SQL queries and optimize database performance. 
   This includes knowledge of query execution plans, indexing strategies, and transaction isolation levels.
   Example of optimizing a SQL query by understanding execution plans:
-  ```
+```
     -- Original query that may perform poorly due to lack of indexing
     SELECT * FROM Orders WHERE CustomerId = 123;
 
@@ -1042,7 +1042,7 @@ Importance: ✅ Common
     CREATE INDEX IX_Orders_CustomerId ON Orders(CustomerId);
 
     SELECT * FROM Orders WHERE CustomerId = 123; -- This query will now utilize the index for faster retrieval.
-  ```
+```
 
 
 ## Closing Thought
@@ -1063,8 +1063,8 @@ you shouldn't be thinking about cache lines.
 ```
 
 ## See also:
-- [Mechanical Sympathy — Part 1: The Principles and Why They Matter](https://www.linkedin.com/pulse/mechanical-sympathy-part-1-principles-why-matter-marek-kubis-fsyue/)
-- [Mechanical Sympathy — Part 2: What Really Matters from CPU tiles/boards to LLM Systems](https://www.linkedin.com/pulse/mechanical-sympathy-part-2-what-really-matters-cpu-motherboards-marek-kubis/)
+- [Mechanical Sympathy — Part 1: The Principles and Why They Matter](https://www.linkedin.com/pulse/mechanical-sympathy-part-1-between-insight-rabbit-holes-marek-kubis-a8xle/)
+- [Mechanical Sympathy — Part 2: What Really Matters from CPU tiles/boards to LLM Systems](https://www.linkedin.com/pulse/mechanical-sympathy-part-2-what-really-matters-from-cpu-marek-kubis-yim4e/?published=t)
 - [Down the rabbit holes of AI-based software development process ](https://www.linkedin.com/pulse/down-rabbit-holes-ai-based-software-development-process-marek-kubis-fsyue)
 - [Is there a need to change the way software is developed today?](https://www.linkedin.com/pulse/need-change-way-software-developed-today-marek-kubis-dntie)
 - [This Isn’t Rebranding. It’s a Structural Shift in Software Development](https://www.linkedin.com/pulse/isnt-rebranding-its-structural-shift-software-marek-kubis-sanpe)
