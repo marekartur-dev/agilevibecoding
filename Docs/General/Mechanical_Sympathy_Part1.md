@@ -172,6 +172,7 @@ Key facts:
 ```
 Foveros = Intel's 3D packaging technology for stacking dies
 P + E cores = Performance + Efficiency cores
+LP+E = Low-Power Efficiency core (ultra-efficient, low-power)
 SoC = System on a Chip (CPU + GPU + Media + I/O)
 IMC = Integrated Memory Controller
 PCIe = Peripheral Component Interconnect Express (I/O interface)
