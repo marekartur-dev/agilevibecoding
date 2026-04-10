@@ -7,7 +7,7 @@
 **Old model** - Family 6 mindset
 - Uniform memory latency (UMA)
 - Cache mostly hidden
-- OS handles thread scheduling scheduling
+- OS handles thread scheduling
 
 **New reality** - Family 18+
 - Non-Uniform Memory Access, NUMA effects on desktop
@@ -21,7 +21,7 @@
 
 ### Practical consequences - C#, Java, Python, etc.
 - Cache-aware programming becomes critical
-- Allocation patterns matter: large bLLC ≠ infinite
+- Allocation patterns matter: large Big Last-Level Cache, bLLC ≠ infinite
 - Parallel frameworks must evolve
 
 Need:
@@ -35,9 +35,9 @@ CPU + GPU unified memory:
 > Concurrency complexity increases. The job scheduler and task handlers must work very closely together.
 
 Heterogeneous cores:
-- P cores → latency-sensitive
-- E cores → throughput
-- LP cores → background
+- Performance, P cores → latency-sensitive
+- Efficiency, E cores → throughput
+- Low Power, LP cores → background
 
 ### Practical changes
 - Thread affinity may matter again
@@ -56,18 +56,18 @@ Stays the same:
 
 ### LLM Machines vs CPUs
 
-What is an **LLM system**?
-- GPU clusters
-- TPU pods
+What is an **Large Language Model, LLM system**?
+- Graphics Processing Unit, GPU clusters
+- Tensor Processing Unit, TPU pods
 - Distributed AI accelerators
 
 **LLM machine** is not:
 - A desktop CPU with motherboard architecture
-- A server CPU with NUMA nodes
-- A mobile SoC with heterogeneous cores
-- A CPU that abstracts away memory locality and cache behavior from the programmer
+- A server CPU with Non-Uniform Memory Access, NUMA nodes
+- A mobile System on a Chip, SoC with heterogeneous cores
+- A CPU that abstracts away memory locality and cache behaviour from the programmer
 - A CPU that do not suffer significant performance penalties when accessing memory across boards or nodes
-- A CPU that do not have a complex memory hierarchy that requires understanding of NUMA effects and cache behavior for optimal performance
+- A CPU that do not have a complex memory hierarchy that requires understanding of NUMA effects and cache behaviour for optimal performance
 - A CPU that do not require understanding of the underlying hardware architecture for performance optimization in certain workloads (e.g., high-performance computing, databases, game engines)
 
 **LLM** architecture comparison:
@@ -97,9 +97,9 @@ CPUs becoming like clusters:
 - Cache → like local storage
 
 There is already significant data movement in LLM systems:
-- Sharding
-- AllReduce
-- Tensor parallelism
+- Sharding - a **database partitioning technique** that involves splitting a large database into smaller, more manageable pieces called **shards**.
+- AllReduce - a collective communication operation used in parallel computing to reduce data across multiple processes and distribute the result back to all processes.
+- Tensor parallelism - a technique used in distributed training of large language models (LLMs) to parallelize the computation of tensor operations across multiple devices or nodes.
 
 > _Converging principle_: **“Move computation to data, not data to computation”**
 
@@ -124,9 +124,9 @@ LLMs tend to:
 - Ignore hardware topology
 
 Especially dangerous on:
-- Nova Lake
-- AMD EPYC
-- GPU clusters
+- Nova Lake and future CPUs
+- AMD EPYC with 8 memory nodes
+- GPU clusters with non-coherent memory
 
 ## Why These Are Rabbit Holes?
 
@@ -135,7 +135,7 @@ Because they are:
 - Highly specialized
 - Often irrelevant for most applications
 
-For most developers these details are abstracted away by:
+**For most developers these details are abstracted away** by:
 - OS
 - runtime
 - compilers
@@ -336,7 +336,7 @@ Features:
 They help with:
 - Generating parallel patterns
 - Suggesting optimizations
-- Explaining cache behavior
+- Explaining cache behaviour
 
 But they fail at:
 - Understanding runtime topology
@@ -357,11 +357,10 @@ Before (Family 6 era):
 - CPU = fast black box
 - Memory = slow but uniform
 
-Now (Nova Lake and beyond):
-System inside CPU:
-  - Multiple compute nodes
-  - Distributed memory
-  - Coherent GPU
+Now (Nova Lake and beyond) - system inside CPU:
+- Multiple compute nodes
+- Distributed memory
+- Coherent GPU
 
 Now with AI:
 ```

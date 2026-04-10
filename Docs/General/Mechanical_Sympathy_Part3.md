@@ -74,7 +74,7 @@ Importance: ✅ Common (High impact, should be default focus)
         }
     }
 ```
-- Use ConfigureAwait(false) when possible to avoid unnecessary context switching and can help prevent deadlocks 
+- Use **ConfigureAwait(false)** when possible to avoid unnecessary context switching and can help prevent deadlocks 
   in our async code and improve efficiency by not forcing continuations to run on the original synchronization context.
   Avoid potential deadlocks example:
 ```
@@ -91,7 +91,7 @@ Priority: 3 — Concurrency Model
 Importance: ⚠️ Situational
 ```
 
-- Utilize parallel loops with Parallel.For() and Parallel.ForEach() to take advantage of multiple CPU cores for data processing tasks, 
+- Utilize parallel loops with **Parallel.For()** and **Parallel.ForEach()** to take advantage of multiple CPU cores for data processing tasks, 
   but be cautious of thread contention and overhead. Examples have already been given in part 2 of the _Mechanical Sympathy_ series.
 - Use Partitioner class for efficient workload distribution in parallel loops, especially when processing large collections. 
   This can help improve performance by reducing contention and improving cache locality. Example already provided.
@@ -102,7 +102,7 @@ Priority: 2 — Data Access & I/O
 Importance: ✅ Common
 ```
 
-- Implement data caching with in-memory cache or distributed cache (like Redis) to reduce latency and improve performance for frequently accessed data. 
+- Implement data caching with in-memory cache or distributed cache (like **Redis**) to reduce latency and improve performance for frequently accessed data. 
   Caching can significantly speed up data retrieval and reduce load on databases or external services.
   In-memory cache example:
 ```
@@ -111,6 +111,7 @@ Importance: ✅ Common
     {
         _cache = cache;
     }
+
     public async Task<string> GetDataAsync(string key)
     {
         if (!_cache.TryGetValue(key, out string data))
@@ -128,6 +129,7 @@ Importance: ✅ Common
     {
         _cache = cache;
     }
+
     public async Task<string> GetDataAsync(string key)
     {
         var data = await _cache.GetStringAsync(key);
@@ -154,16 +156,19 @@ Importance: ⚠️ Situational
   Example of using ConcurrentQueue:
 ```
     private readonly ConcurrentQueue<string> _queue = new ConcurrentQueue<string>();
+
     public void Enqueue(string item)
     {
         _queue.Enqueue(item); // Thread-safe enqueue operation.
     }
+
     public bool TryDequeue(out string item)
     {
         return _queue.TryDequeue(out item); // Thread-safe dequeue operation.
     }
 ```
-- Use efficient synchronization constructs like SemaphoreSlim, ReaderWriterLockSlim, Monitor, or ConcurrentDictionary to manage access to shared resources without causing excessive blocking or contention. 
+- Use efficient synchronization constructs like SemaphoreSlim, ReaderWriterLockSlim, Monitor, or ConcurrentDictionary 
+  to manage access to shared resources without causing excessive blocking or contention. 
   These constructs can help improve performance by allowing multiple threads to access resources concurrently while still ensuring thread safety.
   Example of using `lock` on bad way:
 ```
@@ -232,7 +237,7 @@ Importance: ⚠️ Situational
     
     public void Increment()
     {
-        Interlocked.Increment(ref _counter); // Atomically increments the counter.
+        Interlocked.Increment(ref _counter);   // Atomically increments the counter.
     }
     
     public long GetCounter()
@@ -252,7 +257,9 @@ Importance: ✅ Common
   while immediate execution can help improve performance by materializing the results when needed.
   Example of deferred execution that can lead to performance issues:
 ```
-    var query = myCollection.Where(x => x.IsActive); // Deferred execution, query is not executed until enumerated.
+    // Deferred execution, query is not executed until enumerated.
+    var query = myCollection.Where(x => x.IsActive); 
+
     foreach (var item in query)
     {
         // Each enumeration will execute the query again, which can lead to performance issues.
@@ -260,7 +267,9 @@ Importance: ✅ Common
 ```
   Example of immediate execution that can improve performance:
 ```
-    var activeItems = myCollection.Where(x => x.IsActive).ToList(); // Immediate execution, results are materialized in a list.
+    // Immediate execution, results are materialized in a list.
+    var activeItems = myCollection.Where(x => x.IsActive).ToList(); 
+
     foreach (var item in activeItems)
     {
         // The query is executed only once, and the results are stored in memory for efficient access.
@@ -271,16 +280,18 @@ Importance: ✅ Common
   are usually more concise with method syntax.
   Example of using LINQ query syntax:
 ```
+    // LINQ query syntax for better readability.
     var activeItems = from item in myCollection
                       where item.IsActive
-                      select item; // LINQ query syntax for better readability.
+                      select item; 
 ```
   Example of using LINQ method syntax:
 ```
-    var activeItems = myCollection.Where(x => x.IsActive); // LINQ method syntax, which can be less readable for complex queries.
+    // LINQ method syntax, which can be less readable for complex queries.
+    var activeItems = myCollection.Where(x => x.IsActive); 
 ```
 - Be aware of potential pitfalls when using LINQ in a multithreaded environment to avoid issues with thread safety and performance bottlenecks. 
-  Bad way, multiple threads enumerating the same `IEnumerable` resulting from a LINQ query, which may lead to unpredictable behavior:
+  Bad way, multiple threads enumerating the same `IEnumerable` resulting from a LINQ query, which may lead to unpredictable behaviour:
 ```
     Parallel.ForEach(items, item =>
     {
@@ -394,7 +405,7 @@ Importance: ✅ Common (High impact, should be default focus)
 ```
 
 - Choose the right data structure for your needs to optimize performance and memory usage. 
-  For example, use a Dictionary for fast lookups, a List for dynamic arrays, or a LinkedList for efficient insertions and deletions.
+  For example, use a **Dictionary** for fast lookups, a List for dynamic arrays, or a LinkedList for efficient insertions and deletions.
   Example of choosing the right data structure:
 ```
     // Using a Dictionary for fast lookups by key.
@@ -466,7 +477,7 @@ Importance: ⚠️ Situational (High impact in specialized domains)
   Splay self-adjusting binary trees, or  probabilistic data structure like Skip List can help optimize performance for specific scenarios, 
   but they may require additional complexity and maintenance.
   The ability to recognize different algorithms is essential for identifying NP problems such as the knapsack problem, 
-  the traveling salesman problem, the graph coloring problem, and the Bloom filter for membership testing in a space-efficient manner, etc.
+  the traveling salesman problem, the graph colouring problem, and the Bloom filter for membership testing in a space-efficient manner, etc..
   
   Example of using a Trie for efficient prefix searching:
 ```
@@ -522,8 +533,11 @@ Importance: 🚫 Rare
 ```
     public void InvokeMethod(object obj, string methodName)
     {
-        var method = obj.GetType().GetMethod(methodName); // Reflection to get method info, which can be slow.
-        method.Invoke(obj, null); // Reflection to invoke the method, which can also be slow.
+        // Reflection to get method info, which can be slow.
+        var method = obj.GetType().GetMethod(methodName); 
+
+        // Reflection to invoke the method, which can also be slow.
+        method.Invoke(obj, null); 
     }
 ```
 - Use dynamically generated lambda expressions instead of reflection for better performance when creating delegates or accessing members at runtime. 
@@ -543,6 +557,7 @@ Importance: 🚫 Rare
         var setter = property.SetMethod
                              .CreateDelegate(typeof(Action<,>)
                              .MakeGenericType(property.DeclaringType, property.PropertyType));        
+
         ((dynamic)setter)(obj, value);
     }
 ```
@@ -573,28 +588,37 @@ Importance: ⚠️ Situational
 ```
     public void ProcessDataWithSIMD(float[] data)
     {
-        int vectorSize = Vector<float>.Count; // Get the number of elements that can be processed in parallel.
+        // Get the number of elements that can be processed in parallel.
+        int vectorSize = Vector<float>.Count; 
+        
         for (int i = 0; i < data.Length; i += vectorSize)
         {
-            var vector = new Vector<float>(data, i); // Load a vector of data from the array.
-            var result = Vector.Multiply(vector, new Vector<float>(2.0f)); // Perform SIMD operation (e.g., multiply by 2).
-            result.CopyTo(data, i); // Store the result back into the array.
+            // Load a vector of data from the array.
+            var vector = new Vector<float>(data, i); 
+
+            // Perform SIMD operation (e.g., multiply by 2).
+            var result = Vector.Multiply(vector, new Vector<float>(2.0f)); 
+
+            // Store the result back into the array.
+            result.CopyTo(data, i); 
         }
     }
 ```
-- Ensure compatibility with hardware-accelerated SIMD instructions by using the System.Numerics.Vectors library and checking for hardware support at runtime. 
+- Ensure compatibility with hardware-accelerated SIMD instructions by using the **System.Numerics.Vectors** library and checking for hardware support at runtime. 
   This can help improve performance by leveraging hardware capabilities, but it may require additional checks to ensure compatibility.
   Example of checking for hardware support for SIMD:
 ```
     public void ProcessDataWithSIMD(float[] data)
     {
-        if (Vector.IsHardwareAccelerated) // Check if the hardware supports SIMD instructions.
+        // Check if the hardware supports SIMD instructions.
+        if (Vector.IsHardwareAccelerated) 
         {
             int vectorSize = Vector<float>.Count;
             for (int i = 0; i < data.Length; i += vectorSize)
             {
                 var vector = new Vector<float>(data, i);
                 var result = Vector.Multiply(vector, new Vector<float>(2.0f));
+
                 result.CopyTo(data, i);
             }
         }
@@ -624,11 +648,13 @@ Importance: ⚠️ Situational
     {
         if (TryGetData(out var data))
         {
-            return new ValueTask<string>(data); // Return a completed ValueTask if data is available synchronously.
+            // Return a completed ValueTask if data is available synchronously.
+            return new ValueTask<string>(data); 
         }
         else
         {
-            return new ValueTask<string>(FetchDataAsync()); // Return a ValueTask that represents an asynchronous operation.
+            // Return a ValueTask that represents an asynchronous operation.
+            return new ValueTask<string>(FetchDataAsync()); 
         }
     }
 ```
@@ -641,11 +667,13 @@ Importance: ⚠️ Situational
     {
         if (IsDataAvailable())
         {
-            return GetDataSynchronously(); // Use synchronous method for short-lived operations.
+            // Use synchronous method for short-lived operations.
+            return GetDataSynchronously(); 
         }
         else
         {
-            return await FetchDataFromDatabaseAsync(); // Use asynchronous method for long-running operations.
+            // Use asynchronous method for long-running operations.
+            return await FetchDataFromDatabaseAsync(); 
         }
     }
 ```
@@ -684,8 +712,12 @@ Importance: ⚠️ Situational
   Example of using generics to avoid boxing and unboxing:
 ```
     // Using a generic List to avoid boxing and unboxing of value types.
-    List<int> numbers = new List<int>(); // No boxing occurs when adding integers to the list.
-    numbers.Add(42);                     // Adding an integer to the list without boxing.
+
+    // No boxing occurs when adding integers to the list.
+    List<int> numbers = new List<int>(); 
+
+    // Adding an integer to the list without boxing.
+    numbers.Add(42);                     
 
     // Using a custom interface to avoid boxing when working with value types.
     public interface IProcessor<T>
@@ -708,7 +740,8 @@ Importance: ⚠️ Situational
         T Value { get; set; }
     }
 
-    public class Number<T> : INumber<T> // Utilize generics to avoid boxing
+    // Utilize generics to avoid boxing
+    public class Number<T> : INumber<T> 
     {
         public T Value { get; set; }
     }
@@ -748,7 +781,8 @@ Importance: ⚠️ Situational
     // Using MessagePack for efficient serialization of objects to a compact binary format.
     private byte[] SerializeObjectToMessagePack<T>(T obj)
     {
-        return MessagePackSerializer.Serialize(obj); // Efficient serialization using MessagePack.
+        // Efficient serialization using MessagePack.
+        return MessagePackSerializer.Serialize(obj); 
     }
 
     // Using Newtonsoft.Json - a faster, more efficient library for serialization compared to XmlSerializer.
@@ -768,14 +802,18 @@ Importance: ⚠️ Situational
         private readonly HttpClient _httpClient;
         public MyService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClientFactory.CreateClient(); // Create an HttpClient instance from the factory.
+            // Create an HttpClient instance from the factory.
+            _httpClient = httpClientFactory.CreateClient(); 
         }
 
         public async Task<string> GetDataAsync(string url)
         {
-            var response = await _httpClient.GetAsync(url); // Use the HttpClient instance to make a request.
+            // Use the HttpClient instance to make a request.
+            var response = await _httpClient.GetAsync(url); 
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync(); // Read the response content as a string.
+
+            // Read the response content as a string.
+            return await response.Content.ReadAsStringAsync(); 
         }
     }
 ```
@@ -794,11 +832,13 @@ Importance: ✅ Common
     {
         try
         {
-            return int.Parse(input); // Using exceptions for flow control, which can degrade performance.
+            // Using exceptions for flow control, which can degrade performance.
+            return int.Parse(input); 
         }
         catch (FormatException)
         {
-            return -1; // Return a default value on parsing failure, which is not ideal.
+            // Return a default value on parsing failure, which is not ideal.
+            return -1; 
         }
     }
 ```
@@ -806,13 +846,16 @@ Importance: ✅ Common
 ```
     public int ParseInt(string input)
     {
-        if (int.TryParse(input, out int result)) // Using TryParse to avoid exceptions for flow control.
+        // Using TryParse to avoid exceptions for flow control.
+        if (int.TryParse(input, out int result)) 
         {
-            return result; // Return the parsed integer if successful.
+            // Return the parsed integer if successful.
+            return result; 
         }
         else
         {
-            return -1; // Return a default value on parsing failure, which is more efficient.
+            // Return a default value on parsing failure, which is more efficient.
+            return -1; 
         }
     }
 ```
@@ -962,7 +1005,9 @@ Importance: ✅ Common
         // Using Lazy<T> to initialize resources only when needed
         private readonly Lazy<string> _expensiveValue = new Lazy<string>(() => ComputeExpensiveValue());
         
-        public string ExpensiveValue => _expensiveValue.Value; // The expensive value will be computed only when accessed for the first time.
+        // The expensive value will be computed only when accessed for the first time.
+        public string ExpensiveValue => _expensiveValue.Value; 
+
         private static string ComputeExpensiveValue()
         {
             // Simulate an expensive computation.
@@ -1004,10 +1049,13 @@ Importance: ⚠️ Situational
 ```
     public string BuildString(IEnumerable<string> parts)
     {
-        string result = string.Empty; // This will create a new string object on each concatenation, leading to performance issues.
+        // This will create a new string object on each concatenation, leading to performance issues.
+        string result = string.Empty; 
+
         foreach (var part in parts)
         {
-            result += part;           // Concatenating strings in a loop can lead to excessive memory allocations.
+            // Concatenating strings in a loop can lead to excessive memory allocations.
+            result += part;           
         }
         return result;
     }
@@ -1016,12 +1064,17 @@ Importance: ⚠️ Situational
 ```
     public string BuildString(IEnumerable<string> parts)
     {
-        var stringBuilder = new StringBuilder(); // Use StringBuilder to efficiently build a large string.
+        // Use StringBuilder to efficiently build a large string.
+        var stringBuilder = new StringBuilder(); 
+
         foreach (var part in parts)
         {
-            stringBuilder.Append(part);  // Append each part to the StringBuilder.
+            // Append each part to the StringBuilder.
+            stringBuilder.Append(part);  
         }
-        return stringBuilder.ToString(); // Convert the StringBuilder to a string once all parts are appended.
+
+        // Convert the StringBuilder to a string once all parts are appended.
+        return stringBuilder.ToString(); 
     }
 ```
 
@@ -1064,7 +1117,7 @@ you shouldn't be thinking about cache lines.
 
 ## See also:
 - [Mechanical Sympathy — Part 1: The Principles and Why They Matter](https://www.linkedin.com/pulse/mechanical-sympathy-part-1-between-insight-rabbit-holes-marek-kubis-a8xle/)
-- [Mechanical Sympathy — Part 2: What Really Matters from CPU tiles/boards to LLM Systems](https://www.linkedin.com/pulse/mechanical-sympathy-part-2-what-really-matters-from-cpu-marek-kubis-yim4e/?published=t)
+- [Mechanical Sympathy — Part 2: What Really Matters from CPU tiles/boards to LLM Systems](https://www.linkedin.com/pulse/mechanical-sympathy-part-2-what-really-matters-from-cpu-marek-kubis-yim4e/)
 - [Down the rabbit holes of AI-based software development process ](https://www.linkedin.com/pulse/down-rabbit-holes-ai-based-software-development-process-marek-kubis-fsyue)
 - [Is there a need to change the way software is developed today?](https://www.linkedin.com/pulse/need-change-way-software-developed-today-marek-kubis-dntie)
 - [This Isn’t Rebranding. It’s a Structural Shift in Software Development](https://www.linkedin.com/pulse/isnt-rebranding-its-structural-shift-software-marek-kubis-sanpe)

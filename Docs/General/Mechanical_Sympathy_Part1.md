@@ -57,13 +57,13 @@ and cache hardware hierarchies can move us far from the actual goal:
 
 So let's bridge levels of abstraction and connect:
 - CPU architecture
-- OS/runtime behavior
+- OS/runtime behaviour
 - application-level patterns
 - AI/LLM systems
 
 ### Rabbit Hole #1 – CPU Architecture
 
-> To demonstrate how deep this rabbit hole goes, let’s briefly step into it…
+> To demonstrate how deep this rabbit hole goes, [let’s briefly step into it…](https://www.intel.com/content/www/us/en/gaming/resources/how-hybrid-design-works.html)
 
 #### Evolution Across Intel Families
 
@@ -108,15 +108,15 @@ Cores ── Ring / Mesh ── Shared L3
             DRAM
 ```
 
-- Shared LLC (L3)
+- Shared Last-Level Cache, LLC (L3)
 - Ring → mesh evolution, interconnect
 - Hybrid cores (later)
 
 ##### Family 18 (Nova Lake)
 ```
-Multiple Tiles (NUMA-like)
+Multiple Tiles (Non-Uniform Memory Access, NUMA-like)
    │
-Distributed LLC (bLLC per tile)
+Distributed LLC (Big Last-Level Cache, bLLC per tile)
    │
 SoC Tile (memory + IO)
    │
@@ -126,8 +126,8 @@ Shared DRAM
 <pre><code>
 Feature	        Family 6	Family 18
 ---------------------------------------------
-Die	        Monolithic	Tiled
-LLC             Shared	        Distributed
+Die	            Monolithic	Tiled
+LLC             Shared	    Distributed
 Interconnect	Ring/Mesh	Package fabric
 Memory	        UMA	        NUMA-like
 GPU	    Separate or small	Fully integrated tile
@@ -152,22 +152,33 @@ CXL memory expansion
 - HBM
 - CXL-attached memory
 
-##### Nova Lake-S (Family 18) — key shift 
+##### [Nova Lake-S](https://wccftech.com/roundup/intel-nova-lake-s/) (Family 18) — key shift 
 
 > A structured, diagram-heavy explanation of Intel Nova Lake-S, latest CPU
+
+<img src="./../Images/Intel-untitled-design-16-1456x819.jpg" alt="Intel Nova Lake-S Core Topology" width="800" style="float: right; margin-left: 10px;">
+
+> This is no longer a CPU — it is a distributed system inside a package.
 
 Key facts:
 - Up to 52 cores (P + E + LP-E hybrid)
 - Tile-based (chiplet / disaggregated) design
 - Dual compute integration, CPU + GPU/media tiles
-
-> This is no longer a CPU — it is a distributed system inside a package.
-
 - Hybrid GPU: Xe3 (graphics) + Xe4 / Xe3P (media/display)
 - New Family 18 CPU classification replacing long-standing Family 6
 
 ##### High-level tiled architecture
+
 ```
+Foveros = Intel's 3D packaging technology for stacking dies
+P + E cores = Performance + Efficiency cores
+SoC = System on a Chip (CPU + GPU + Media + I/O)
+IMC = Integrated Memory Controller
+PCIe = Peripheral Component Interconnect Express (I/O interface)
+GPU Tile = Graphics Processing Unit tile (Xe3 for rendering)
+Xe3 = Intel's GPU architecture for graphics workloads
+Xe4 / Xe3P = Intel's GPU architectures for media and display workloads
+
                 ┌──────────────────────────────┐
                 │        PACKAGE (Foveros)     │
                 │                              │
@@ -332,7 +343,7 @@ Logical memory hierarchy:
 ```
 Key changes
 - Distributed LLC
-- Non-Uniform Memory Access, NUMA-like desktop behavior
+- Non-Uniform Memory Access, NUMA-like desktop behaviour
 - CPU–GPU convergence
 
 ### What’s new vs previous Intel designs
@@ -342,9 +353,9 @@ Key changes
 - Shared across CPU + GPU
 - Improves bandwidth vs DRAM bottlenecks
 
-👉 This is a major shift from ring/mesh unified LLC
+👉 This is a major shift from ring/mesh unified Last-Level Cache (LLC)
 
-2. NUMA-like behavior (even on desktop)
+2. NUMA-like behaviour (even on desktop)
 - Each compute tile ≈ local memory domain
 - Access cost differs:
   - local tile → fast
@@ -380,7 +391,7 @@ Era 4 (Nova Lake):
 
 ### OS Memory Management Across Architectures
 
-> Now we connect hardware → OS behavior.
+> Now we connect hardware → OS behaviour.
 
 #### Linux (NUMA - first design)
 - Strong NUMA awareness
@@ -470,7 +481,7 @@ Important for:
 _.. tbc_..
 
 ## See also:
-- [Mechanical Sympathy — Part 2: What Really Matters from CPU tiles/boards to LLM Systems](https://www.linkedin.com/pulse/mechanical-sympathy-part-2-what-really-matters-from-cpu-marek-kubis-yim4e/?published=t)
+- [Mechanical Sympathy — Part 2: What Really Matters from CPU tiles/boards to LLM Systems](https://www.linkedin.com/pulse/mechanical-sympathy-part-2-what-really-matters-from-cpu-marek-kubis-yim4e/)
 - [Mechanical Sympathy — Part 3: Suggestions for avoiding software quality rabbit holes](https://www.linkedin.com/pulse/mechanical-sympathy-part-3-suggestions-avoiding-software-marek-kubis-vybbe/)
 - [Down the rabbit holes of AI-based software development process ](https://www.linkedin.com/pulse/down-rabbit-holes-ai-based-software-development-process-marek-kubis-fsyue)
 - [Is there a need to change the way software is developed today?](https://www.linkedin.com/pulse/need-change-way-software-developed-today-marek-kubis-dntie)
