@@ -44,7 +44,7 @@ Reality:
 - 1.8s is spent waiting on database/network
 ```
 
-> Without context, AI optimizes what is **visible in code**, not **what dominates runtime**.
+> Without context, AI optimises what is **visible in code**, not **what dominates runtime**.
 
 ## Profiling Before Thinking
 ```
@@ -69,7 +69,7 @@ Example workflow:
 1) Capture baseline (latency, CPU, memory)
 2) Run profiler (e.g., dotnet-trace, PerfView, Application Insights)
 3) Identify top hotspots
-4) Optimize only top contributors (top 10–20%)
+4) optimise only top contributors (top 10–20%)
 
 > 80% of performance gains usually come from 1–2 areas.
 
@@ -114,7 +114,7 @@ Importance: ✅ Common
 - Explore design options
 
 **Bad usage:**
-- “Optimize this code” (no context)
+- “optimise this code” (no context)
 - Blindly applying suggestions
 - Accepting micro-Optimisations without measurement
 
@@ -134,7 +134,7 @@ A practical loop:
 2. Measure (profiling)
 3. Identify bottleneck
 4. Map to pyramid level
-5. Optimize at the correct level
+5. optimise at the correct level
 6. Measure again
 ```
 
@@ -161,7 +161,7 @@ Importance: 🚫 Rare
 
 Only after:
 - Architecture is correct
-- I/O is optimized
+- I/O is optimised
 - Concurrency is controlled
 - Memory profile is understood
 
@@ -228,7 +228,7 @@ Importance: ✅ Common
 
 ### ❌ Naïve Prompt (What not to do)
 ```
-Optimize this C# code for performance.
+optimise this C# code for performance.
 ```
 
 Typical result:
@@ -325,7 +325,7 @@ API endpoint is slow (~1800 ms)
 
 ### ❌ Bad Prompt
 ```
-Optimize this method for performance.
+optimise this method for performance.
 ```
 
 **Typical AI Answer:**
@@ -339,7 +339,7 @@ Optimize this method for performance.
 - Performance improvement: ~0–2%
 - Root problem untouched
 
-> The AI optimized visible code, not actual runtime cost.
+> The AI optimised visible code, not actual runtime cost.
 
 ### ✅ Good Prompt (Using Template)
 ```	
@@ -366,7 +366,7 @@ Avoid micro-Optimisations unless justified.
 - Reduce number of DB round-trips
 - Introduce batching / projection queries
 - Add caching for repeated reads
-- Optimize query indexes
+- optimise query indexes
 
 **Result:**
 - Latency drops from 1800 ms → ~400–600 ms
@@ -467,7 +467,7 @@ Top methods by time:
 
 ### ❌ Naïve AI Prompt
 ```
-How can I optimize this code?
+How can I optimise this code?
 ```
 
 **Result:**
@@ -485,7 +485,7 @@ Here is profiling data:
 Question:
 1. What is the dominant bottleneck?
 2. Which level of the Optimisation Priority Pyramid applies?
-3. What should NOT be optimized yet?
+3. What should NOT be optimised yet?
 ```
 
 
@@ -493,7 +493,7 @@ Question:
 
 - Bottleneck: Database access (~70%+)
 - Priority: Data Access & I/O (Level 2)
-- Do NOT optimize:
+- Do NOT optimise:
   - Memory allocations
   - LINQ usage
   - JIT / inlining
@@ -518,7 +518,7 @@ Engineers make decisions.
 > 1 - AI accelerates coding. 2 - Profiling disciplines thinking.
 
 The real skill is not writing faster code.
-> It is knowing what not to optimize.
+> It is knowing what not to optimise.
 
 ```
 AI does not eliminate performance problems.
@@ -526,7 +526,7 @@ AI does not eliminate performance problems.
 It makes it easier to:
 - Solve the right problem
 …or
-- Optimize the wrong one faster.
+- optimise the wrong one faster.
 
 Rule of thumb:
 

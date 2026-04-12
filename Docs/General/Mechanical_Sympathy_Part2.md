@@ -346,7 +346,7 @@ But they fail at:
 ### New workflow
 
 - _Human_ → **Defines architecture-aware constraints**
-- _LLM_ → **Generates optimized implementation**
+- _LLM_ → **Generates optimised implementation**
 - _Profiler_ → **Validates reality**
 
 ## Practical Takeaway

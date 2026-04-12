@@ -60,12 +60,12 @@ Design a scalable system for processing orders
 - CQRS
 
 **Reality:**
-- You needed a modular monolith
+- We needed a modular monolith
 - System complexity increased 5x
 - Latency increased
 - Debugging became harder
 
-> AI optimizes for _impressiveness_, not _appropriateness_.
+> AI optimises for _impressiveness_, not _appropriateness_.
 
 ### ❌ 2. Ignoring the Cost of Distribution
 ```
@@ -225,7 +225,7 @@ System:
 System:
 - Modular monolith
 - Clear boundaries
-- Optimized DB access
+- optimised DB access
 ```
 
 **Result:**
@@ -236,7 +236,7 @@ System:
 
 ### The “Architecture First” Reality
 ```
-Wrong architecture + optimized code = slow system
+Wrong architecture + optimised code = slow system
 Right architecture + average code = fast system
 ```
 
@@ -417,7 +417,7 @@ Given this trace:
 - **Step 4 — Action**
 ```	
 Add index
-Optimize query
+optimise query
 Introduce caching
 ```	
 
@@ -503,7 +503,7 @@ Mechanical Sympathy is about **respecting reality at every level**:
 ```	
 You don’t optimise code.
 
-📌 You optimize systems… by continuously learning from how they behave.
+📌 You optimise systems… by continuously learning from how they behave.
 ```	
 
 ## Closing Thought

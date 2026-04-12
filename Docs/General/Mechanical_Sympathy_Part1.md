@@ -305,8 +305,8 @@ Intel Nova Lake:
 ```
 
 ### Key insight:
-- Motorola optimized for programmer clarity
-- Intel now optimizes for physical scalability limits
+- Motorola optimised for programmer clarity
+- Intel now optimises for physical scalability limits
 
 > Now that we’ve seen the depth—this is exactly the problem.
 
@@ -410,7 +410,7 @@ Best suited for:
 - Future Intel tiled CPUs
 
 #### Windows
-- Historically Uniform Memory Access, UMA-optimized
+- Historically Uniform Memory Access, UMA-optimised
 Improving NUMA support:
 - Processor groups
 - Thread scheduling heuristics
@@ -424,7 +424,7 @@ Problem:
 Programmer sees: `Flat memory`
 
 But internally:
-- Highly optimized locality + bandwidth control
+- Highly optimised locality + bandwidth control
 
 #### Embedded / RTOS (Motorola legacy style)
 - Deterministic memory

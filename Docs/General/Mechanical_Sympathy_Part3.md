@@ -33,7 +33,7 @@ Importance: ⚠️ Situational
 
 - Remember that garbage collection and using IDisposable are important aspects of tuning C# performance by efficiently using memory resources.
 - Avoid premature optimizations that can be counterproductive, making C# code harder to read, maintain, and extend. 
-- Focus on writing clean and straightforward code, then optimize only when necessary after thorough profiling. 
+- Focus on writing clean and straightforward code, then optimise only when necessary after thorough profiling. 
 
 ## Asynchronous Programming
 ```
@@ -404,7 +404,7 @@ Priority: 1 — Architecture & Algorithms
 Importance: ✅ Common (High impact, should be default focus)
 ```
 
-- Choose the right data structure for your needs to optimize performance and memory usage. 
+- Choose the right data structure for your needs to optimise performance and memory usage. 
   For example, use a **Dictionary** for fast lookups, a List for dynamic arrays, or a LinkedList for efficient insertions and deletions.
   Example of choosing the right data structure:
 ```
@@ -467,14 +467,14 @@ Importance: ✅ Common (High impact, should be default focus)
     }
 ```
 
-## Learn advanced data structures and algorithms to optimize performance for specific use cases
+## Learn advanced data structures and algorithms to optimise performance for specific use cases
 ```
 Priority: 3 — Concurrency Model
 Importance: ⚠️ Situational (High impact in specialized domains)
 ```
 
 - Advanced data structures like B-trees, binomial and Fibonacci heaps, AVL/Red Black self-balancing binary trees, 
-  Splay self-adjusting binary trees, or  probabilistic data structure like Skip List can help optimize performance for specific scenarios, 
+  Splay self-adjusting binary trees, or  probabilistic data structure like Skip List can help optimise performance for specific scenarios, 
   but they may require additional complexity and maintenance.
   The ability to recognize different algorithms is essential for identifying NP problems such as the knapsack problem, 
   the traveling salesman problem, the graph colouring problem, and the Bloom filter for membership testing in a space-efficient manner, etc..
@@ -658,9 +658,9 @@ Importance: ⚠️ Situational
         }
     }
 ```
-- Optimize performance with appropriate async operations by using Task for long-running operations and ValueTask 
+- optimise performance with appropriate async operations by using Task for long-running operations and ValueTask 
   for short-lived operations to minimize overhead and improve responsiveness. 
-  Choosing the right type of asynchronous operation can help optimize performance and improve the responsiveness of applications.
+  Choosing the right type of asynchronous operation can help optimise performance and improve the responsiveness of applications.
   Example of optimizing async operations:
 ```
     public async Task<string> GetDataAsync()
@@ -974,7 +974,7 @@ Priority: 2 — Data Access & I/O
 Importance: ✅ Common
 ```
 
-- Understand the trade-offs between lazy and eager loading to optimize performance and resource usage based on the specific use case. 
+- Understand the trade-offs between lazy and eager loading to optimise performance and resource usage based on the specific use case. 
   Lazy loading can help improve performance by deferring the loading of resources until they are actually needed, 
   while eager loading can help reduce latency by loading resources upfront.
   Example of lazy loading:
@@ -1078,20 +1078,20 @@ Importance: ⚠️ Situational
     }
 ```
 
-## Optimize SQL database queries and improve performance
+## optimise SQL database queries and improve performance
 ```
 Priority: 2 — Data Access & I/O
 Importance: ✅ Common
 ```
 
-- Understanding how SQL Server processes queries, manages indexes, and handles transactions can help you write more efficient SQL queries and optimize database performance. 
+- Understanding how SQL Server processes queries, manages indexes, and handles transactions can help you write more efficient SQL queries and optimise database performance. 
   This includes knowledge of query execution plans, indexing strategies, and transaction isolation levels.
   Example of optimizing a SQL query by understanding execution plans:
 ```
     -- Original query that may perform poorly due to lack of indexing
     SELECT * FROM Orders WHERE CustomerId = 123;
 
-    -- Optimized query with an index on CustomerId for improved performance
+    -- optimised query with an index on CustomerId for improved performance
     CREATE INDEX IX_Orders_CustomerId ON Orders(CustomerId);
 
     SELECT * FROM Orders WHERE CustomerId = 123; -- This query will now utilize the index for faster retrieval.
