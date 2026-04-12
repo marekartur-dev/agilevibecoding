@@ -1,33 +1,31 @@
-# Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve Optimization
+# Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve Optimisation
 
 > In Part 3, we explored where engineers fall into rabbit holes.
-> Now we focus on how to work correctly before optimizing — especially in the age of AI-assisted development.
+> Now we focus on how to work correctly before optimising — especially in the age of AI-assisted development.
 
-<img src="./../Images/Mechanical_sympathy_and_AI_optimization.png" alt="Non-Naive optimistaion" width="600"  style="float: right; margin-left: 10px;">
+<img src="./../Images/Mechanical_sympathy_and_AI_Optimisation.png" alt="Non-Naive optimistaion" width="600"  style="float: right; margin-left: 10px;">
 
 ```
-Optimization Priority Pyramid
+Optimisation Priority Pyramid
 
 1. Architecture & Algorithms
 2. Data Access & I/O
 3. Concurrency Model
 4. Memory & Allocation
-5. Micro-optimizations (Mechanical Sympathy zone)
+5. Micro-Optimisations (Mechanical Sympathy zone)
 ```
 
 > AI can generate code fast. It cannot decide what actually matters unless we guide it with data.
 
 
-
-
-## The Core Problem with AI-Assisted Optimization
+## The Core Problem with AI-Assisted Optimisation
 ```
 Priority: 1 — Architecture & Algorithms
 Importance: ✅ Common
 ```
 
 AI tends to:
-- Over-focus on micro-optimizations
+- Over-focus on micro-Optimisations
 - Suggest premature improvements
 - Ignore system-level bottlenecks
 - It often produces locally optimal but globally irrelevant changes
@@ -63,7 +61,7 @@ Always answer:
 
 Simple mental model:
 ```
-No profile → No optimization
+No profile → No Optimisation
 No measurement → No discussion
 ```
 
@@ -118,13 +116,13 @@ Importance: ✅ Common
 **Bad usage:**
 - “Optimize this code” (no context)
 - Blindly applying suggestions
-- Accepting micro-optimizations without measurement
+- Accepting micro-Optimisations without measurement
 
 > AI should help you explore the solution space — not decide it.
 
 
 
-## Non-Naïve Optimization Workflow
+## Non-Naïve Optimisation Workflow
 ```
 Priority: 1 — Architecture & Algorithms
 Importance: ✅ Common
@@ -152,12 +150,12 @@ Profile:
 
 Decision:
 → Focus on Data Access (Priority 2)
-NOT memory or micro-optimizations
+NOT memory or micro-Optimisations
 ```
 
 ## When Mechanical Sympathy Actually Matters
 ```
-Priority: 5 — Micro-optimizations
+Priority: 5 — Micro-Optimisations
 Importance: 🚫 Rare
 ```
 
@@ -202,11 +200,11 @@ Importance: ⚠️ Situational
 
 ## Common Anti-Patterns in AI-Driven Development
 
-### ❌ Optimization without bottleneck
+### ❌ Optimisation without bottleneck
 
 > “Let’s make it faster” (no data)
 
-### ❌ Micro-optimization first
+### ❌ Micro-Optimisation first
 
 > Jumping to Span, pooling, SIMD too early
 
@@ -226,7 +224,7 @@ Importance: ✅ Common
 ```
 
 > The quality of AI output depends entirely on the quality of context we provide.
-> Without context, we will get micro-optimizations. With context, we may get real improvements.
+> Without context, we will get micro-Optimisations. With context, we may get real improvements.
 
 ### ❌ Naïve Prompt (What not to do)
 ```
@@ -259,11 +257,11 @@ Profiling results:
 
 Constraint:
 - Must preserve readability and maintainability
-- No premature micro-optimizations
+- No premature micro-Optimisations
 
 Task:
-- Suggest optimizations ONLY at the dominant bottleneck level (based on the pyramid)
-- Explicitly explain why lower-level optimizations are NOT relevant
+- Suggest Optimisations ONLY at the dominant bottleneck level (based on the pyramid)
+- Explicitly explain why lower-level Optimisations are NOT relevant
 - Provide before/after reasoning, not just code
 ```
 
@@ -289,15 +287,15 @@ Constraint:
 - Must keep code readable
 
 Task:
-- Suggest optimizations focusing on Data Access & I/O (Priority 2)
-- Avoid memory or micro-optimizations unless justified
+- Suggest Optimisations focusing on Data Access & I/O (Priority 2)
+- Avoid memory or micro-Optimisations unless justified
 - Explain trade-offs
 ```
 
 ### ✅ Expected Quality Response from AI
 
 Suggest:
-- Query optimization
+- Query Optimisation
 - Batching requests
 - Caching strategies
 - Reducing round-trips
@@ -308,7 +306,8 @@ Avoid:
 - JIT tweaks
 
 
-### Rule of thumb✅ Expected Quality Response from AI
+### Rule of thumb
+
 ```
 Bad prompt → Code tweaks
 Good prompt → System improvements
@@ -360,7 +359,7 @@ Profiling:
 
 Task:
 Focus on Data Access & I/O (Priority 2).
-Avoid micro-optimizations unless justified.
+Avoid micro-Optimisations unless justified.
 ```
 
 **High-Quality AI Answer**
@@ -385,7 +384,7 @@ Completely different outcome.
 > **The difference is engineering context**.
 
 
-## Example: Profiling → AI → Optimization Loop
+## Example: Profiling → AI → Optimisation Loop
 
 ### Step 1 — Measure
 ```
@@ -409,8 +408,8 @@ Breakdown:
 
 **Ask AI:**
 ```
-Given this profile, what is the correct optimization level
-according to the Optimization Priority Pyramid?
+Given this profile, what is the correct Optimisation level
+according to the Optimisation Priority Pyramid?
 ```
 
 **Expected answer:**
@@ -428,7 +427,7 @@ Suggest:
 - Index improvements
 
 Do NOT suggest:
-- Memory optimizations
+- Memory Optimisations
 - JIT tweaks
 ```
 
@@ -441,7 +440,7 @@ Examples:
 
 ### Step 6 — Measure Again
 ```
-After optimization:
+After Optimisation:
 - Latency: 2200 ms → 700 ms
 - DB time reduced by ~60%
 ```
@@ -485,7 +484,7 @@ Here is profiling data:
 
 Question:
 1. What is the dominant bottleneck?
-2. Which level of the Optimization Priority Pyramid applies?
+2. Which level of the Optimisation Priority Pyramid applies?
 3. What should NOT be optimized yet?
 ```
 

@@ -172,7 +172,7 @@ Key facts:
 ```
 Foveros = Intel's 3D packaging technology for stacking dies
 P + E cores = Performance + Efficiency cores
-LP+E = Low-Power Efficiency core (ultra-efficient, low-power)
+LP-E = Low-Power Efficiency core (ultra-efficient, low-power)
 SoC = System on a Chip (CPU + GPU + Media + I/O)
 IMC = Integrated Memory Controller
 PCIe = Peripheral Component Interconnect Express (I/O interface)
@@ -484,6 +484,7 @@ _.. tbc_..
 ## See also:
 - [Mechanical Sympathy — Part 2: What Really Matters from CPU tiles/boards to LLM Systems](https://www.linkedin.com/pulse/mechanical-sympathy-part-2-what-really-matters-from-cpu-marek-kubis-yim4e/)
 - [Mechanical Sympathy — Part 3: Suggestions for avoiding software quality rabbit holes](https://www.linkedin.com/pulse/mechanical-sympathy-part-3-suggestions-avoiding-software-marek-kubis-vybbe/)
+- [Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve Optimization](https://www.linkedin.com/pulse/mechanical-sympathy-part-4-ai-profiling-non-na%C3%AFve-marek-kubis-bub0e)
 - [Down the rabbit holes of AI-based software development process ](https://www.linkedin.com/pulse/down-rabbit-holes-ai-based-software-development-process-marek-kubis-fsyue)
 - [Is there a need to change the way software is developed today?](https://www.linkedin.com/pulse/need-change-way-software-developed-today-marek-kubis-dntie)
 - [This Isn’t Rebranding. It’s a Structural Shift in Software Development](https://www.linkedin.com/pulse/isnt-rebranding-its-structural-shift-software-marek-kubis-sanpe)
