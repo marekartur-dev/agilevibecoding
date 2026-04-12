@@ -1,4 +1,4 @@
-# The_Secrets_of_Feedback_Loops
+# The Secrets of Feedback Loops
 
 > AI didn’t just accelerate development — it challenged its foundations.
 
