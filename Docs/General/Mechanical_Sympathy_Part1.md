@@ -22,7 +22,7 @@ We should cultivate mechanical empathy in software development when working with
 scalable, or leverage AI, but very, very carefully so that the compelling doesn't overshadow the important.
 
 Therefore, I believe that software developers should primarily focus on established design principles, proven best practices, 
-and pragmatic performance techniques (e.g., C#, SQL, system-level optimization) when it matters. Why? Because Mechanical Sympathy 
+and pragmatic performance techniques (e.g., C#, SQL, system-level optimisation) when it matters. Why? Because Mechanical Sympathy 
 will force them down a uncomfortable position. Because Mechanical Sympathy focuses on a narrow subset of problems, 
 while real systems require a different, broader perspective. 
 
@@ -484,7 +484,7 @@ _.. tbc_..
 ## See also:
 - [Mechanical Sympathy — Part 2: What Really Matters from CPU tiles/boards to LLM Systems](https://www.linkedin.com/pulse/mechanical-sympathy-part-2-what-really-matters-from-cpu-marek-kubis-yim4e/)
 - [Mechanical Sympathy — Part 3: Suggestions for avoiding software quality rabbit holes](https://www.linkedin.com/pulse/mechanical-sympathy-part-3-suggestions-avoiding-software-marek-kubis-vybbe/)
-- [Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve Optimization](https://www.linkedin.com/pulse/mechanical-sympathy-part-4-ai-profiling-non-na%C3%AFve-marek-kubis-bub0e)
+- [Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve optimisation](https://www.linkedin.com/pulse/mechanical-sympathy-part-4-ai-profiling-non-na%C3%AFve-marek-kubis-bub0e)
 - [Mechanical Sympathy — Part 5: Mechanical Sympathy — Part 5: AI and Architectural Decisions Where the Most Expensive Mistakes Are Made and Continuous Optimisation](https://www.linkedin.com/pulse/mechanical-sympathy-part-5-ai-architectural-decisions-marek-kubis-6nbae)
 - [Down the rabbit holes of AI-based software development process ](https://www.linkedin.com/pulse/down-rabbit-holes-ai-based-software-development-process-marek-kubis-fsyue)
 - [Is there a need to change the way software is developed today?](https://www.linkedin.com/pulse/need-change-way-software-developed-today-marek-kubis-dntie)

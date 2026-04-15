@@ -68,7 +68,7 @@ What is an **Large Language Model, LLM system**?
 - A CPU that abstracts away memory locality and cache behaviour from the programmer
 - A CPU that do not suffer significant performance penalties when accessing memory across boards or nodes
 - A CPU that do not have a complex memory hierarchy that requires understanding of NUMA effects and cache behaviour for optimal performance
-- A CPU that do not require understanding of the underlying hardware architecture for performance optimization in certain workloads (e.g., high-performance computing, databases, game engines)
+- A CPU that do not require understanding of the underlying hardware architecture for performance optimisation in certain workloads (e.g., high-performance computing, databases, game engines)
 
 **LLM** architecture comparison:
 ```
@@ -156,7 +156,7 @@ are often negligible compared to:
 - Secondary for application developers
 
 It is:
-- A set of optimization techniques
+- A set of optimisation techniques
 - Not a paradigm shift
 
 > _Emerging Principle_: **“Performance-aware prompting may reduce the need for some low-level hand-tuning”**.
@@ -236,7 +236,7 @@ But:
 - Not guaranteed thread affinity 
 - Requires understanding of underlying hardware topology
 - Often not worth the effort 
-- Can lead to over-optimization 
+- Can lead to over-optimisation 
 - Reduces maintainability, readability, and scalability
 - Gains often negligible vs algorithmic improvements
 
@@ -335,7 +335,7 @@ Features:
 ### What LLMs change (realistically)
 They help with:
 - Generating parallel patterns
-- Suggesting optimizations
+- Suggesting optimisations
 - Explaining cache behaviour
 
 But they fail at:
@@ -383,14 +383,14 @@ BUT:
 - They are more about understanding the underlying hardware for performance-critical code, 
   rather than changing the overall software development process.
 - They are not a new paradigm for software development, but rather a set of guidelines for optimizing specific types of code.
-- They are not relevant for most software development tasks, and focusing on them can lead to over-optimization and neglect of more important design principles.
+- They are not relevant for most software development tasks, and focusing on them can lead to over-optimisation and neglect of more important design principles.
 - They are focus on tasks that are already solved by BIOS, OS, IDE, frameworks like .NET, and compilers of programming languages. 
 - In case of any of the above, **the principles of mechanical sympathy are important for the technology stack developers** (Microsoft, Amazon, Google, ..), **less for the application developers**.
 
 
 ### Closing Thought
 
-> Mechanical Sympathy is a local optimization strategy, not a global engineering principle.
+> Mechanical Sympathy is a local optimisation strategy, not a global engineering principle.
 
 ```
 Use mechanical sympathy IF:
@@ -413,7 +413,7 @@ _.. tbc.._
 ## See also:
 - [Mechanical Sympathy — Part 1: The Principles and Why They Matter](https://www.linkedin.com/pulse/mechanical-sympathy-part-1-between-insight-rabbit-holes-marek-kubis-a8xle/)
 - [Mechanical Sympathy — Part 3: Suggestions for avoiding software quality rabbit holes](https://www.linkedin.com/pulse/mechanical-sympathy-part-3-suggestions-avoiding-software-marek-kubis-vybbe/)
-- [Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve Optimization](https://www.linkedin.com/pulse/mechanical-sympathy-part-4-ai-profiling-non-na%C3%AFve-marek-kubis-bub0e)
+- [Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve optimisation](https://www.linkedin.com/pulse/mechanical-sympathy-part-4-ai-profiling-non-na%C3%AFve-marek-kubis-bub0e)
 - [Mechanical Sympathy — Part 5: Mechanical Sympathy — Part 5: AI and Architectural Decisions Where the Most Expensive Mistakes Are Made and Continuous Optimisation](https://www.linkedin.com/pulse/mechanical-sympathy-part-5-ai-architectural-decisions-marek-kubis-6nbae)
 - [Down the rabbit holes of AI-based software development process ](https://www.linkedin.com/pulse/down-rabbit-holes-ai-based-software-development-process-marek-kubis-fsyue)
 - [Is there a need to change the way software is developed today?](https://www.linkedin.com/pulse/need-change-way-software-developed-today-marek-kubis-dntie)

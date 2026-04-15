@@ -149,7 +149,7 @@ Data shape and access patterns define performance.
 ```
 Level               Cost to Fix
 ------------------------------------
-Micro-optimization  → Low
+Micro-optimisation  → Low
 Code-level issue    → Medium
 Architecture flaw   → Extremely High
 ```
@@ -242,7 +242,7 @@ Right architecture + average code = fast system
 
 ### When Mechanical Sympathy Actually Applies (Again)
 ```
-Priority: 5 — Micro-optimizations
+Priority: 5 — Micro-optimisations
 Importance: 🚫 Rare
 ```
 
@@ -251,7 +251,7 @@ At the architectural level:
 - Single Instruction, Multiple Data (SIMD) doesn’t matter
 - JIT tricks don’t matter
 
-> If architecture is wrong, low-level optimizations are irrelevant.
+> If architecture is wrong, low-level optimisations are irrelevant.
 
 ```
 Decision Checklist (Before You Ask AI)
@@ -472,7 +472,7 @@ Month 6: 900 ms
 
 ## Where Mechanical Sympathy Finally Fits
 ```	
-Priority: 5 — Micro-optimizations
+Priority: 5 — Micro-optimisations
 Importance: 🚫 Rare
 ```	
 
@@ -486,7 +486,7 @@ Only then:
 - Cache alignment
 - Single Instruction, Multiple Data (SIMD)
 
-### The Full System View (Parts 3–6 Combined)
+### The Full System View (Parts 3–5 Combined)
 ```	
 Part 3 → Avoid rabbit holes
 Part 4 → Use AI correctly
@@ -527,7 +527,7 @@ The biggest risk in AI-driven development is not bad code.
 - [Mechanical Sympathy — Part 1: The Principles and Why They Matter](https://www.linkedin.com/pulse/mechanical-sympathy-part-1-between-insight-rabbit-holes-marek-kubis-a8xle/)
 - [Mechanical Sympathy — Part 2: What Really Matters from CPU tiles/boards to LLM Systems](https://www.linkedin.com/pulse/mechanical-sympathy-part-2-what-really-matters-from-cpu-marek-kubis-yim4e/)
 - [Mechanical Sympathy — Part 3: Suggestions for avoiding software quality rabbit holes](https://www.linkedin.com/pulse/mechanical-sympathy-part-3-suggestions-avoiding-software-marek-kubis-vybbe/)
-- [Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve Optimization](https://www.linkedin.com/pulse/mechanical-sympathy-part-4-ai-profiling-non-na%C3%AFve-marek-kubis-bub0e)
+- [Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve optimisation](https://www.linkedin.com/pulse/mechanical-sympathy-part-4-ai-profiling-non-na%C3%AFve-marek-kubis-bub0e)
 - [Down the rabbit holes of AI-based software development process ](https://www.linkedin.com/pulse/down-rabbit-holes-ai-based-software-development-process-marek-kubis-fsyue)
 - [Is there a need to change the way software is developed today?](https://www.linkedin.com/pulse/need-change-way-software-developed-today-marek-kubis-dntie)
 - [This Isn’t Rebranding. It’s a Structural Shift in Software Development](https://www.linkedin.com/pulse/isnt-rebranding-its-structural-shift-software-marek-kubis-sanpe)

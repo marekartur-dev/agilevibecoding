@@ -5,17 +5,17 @@
 <img src="./../Images/avoid_rabbit_holes.png" alt="Avoiding rabbit holes" width="600"  style="float: right; margin-left: 10px;">
 
 ```
-Optimization Priority Pyramid
+optimisation Priority Pyramid
 
 1. Architecture & Algorithms
 2. Data Access & I/O
 3. Concurrency Model
 4. Memory & Allocation
-5. Micro-optimizations (Mechanical Sympathy zone)
+5. Micro-optimisations (Mechanical Sympathy zone)
 ```
 
 > This is not a checklist to apply.
-> This is a map of areas where **optimization can happen — only after profiling proves it is necessary**.
+> This is a map of areas where **optimisation can happen — only after profiling proves it is necessary**.
 
 ```
 Importance tiers: 
@@ -32,7 +32,7 @@ Importance: ⚠️ Situational
 ```
 
 - Remember that garbage collection and using IDisposable are important aspects of tuning C# performance by efficiently using memory resources.
-- Avoid premature optimizations that can be counterproductive, making C# code harder to read, maintain, and extend. 
+- Avoid premature optimisations that can be counterproductive, making C# code harder to read, maintain, and extend. 
 - Focus on writing clean and straightforward code, then optimise only when necessary after thorough profiling. 
 
 ## Asynchronous Programming
@@ -43,6 +43,7 @@ Importance: ✅ Common (High impact, should be default focus)
 
 - Use asynchronous programming with async/await to improve responsiveness and scalability of C# applications, especially for I/O-bound operations.
 - Limit the number of concurrent operations. Without limiting concurrency, many tasks will run simultaneously, which can lead to heavy load and degraded overall performance. 
+
   Bad way:
 ```
     public async Task ProcessManyItems(List<string> items)
@@ -246,7 +247,7 @@ Importance: ⚠️ Situational
     }
 ```
 
-## LINQ Performance Optimization
+## LINQ Performance optimisation
 ```
 Priority: 2 — Data Access & I/O
 Importance: ✅ Common
@@ -313,7 +314,7 @@ Importance: ✅ Common
 
 ## JIT Compilation
 ```
-Priority: 5 — Micro-optimizations
+Priority: 5 — Micro-optimisations
 Importance: 🚫 Rare
 ```
 
@@ -523,7 +524,7 @@ Importance: ⚠️ Situational (High impact in specialized domains)
 
 ## Reflection and Code Generation
 ```
-Priority: 5 — Micro-optimizations
+Priority: 5 — Micro-optimisations
 Importance: 🚫 Rare
 ```
 
@@ -747,7 +748,7 @@ Importance: ⚠️ Situational
     }
 ```
 
-## Network Communication Optimization
+## Network Communication optimisation
 ```
 Priority: 3 — Concurrency Model
 Importance: ⚠️ Situational
@@ -1100,7 +1101,7 @@ Importance: ✅ Common
 
 ## Closing Thought
 
-> Mechanical Sympathy matters — but only after we’ve exhausted architectural, algorithmic, and system-level optimizations.
+> Mechanical Sympathy matters — but only after we’ve exhausted architectural, algorithmic, and system-level optimisations.
 
 The real challenge is not understanding everything…
 > …but knowing what matters, and what is just a rabbit hole.
@@ -1118,7 +1119,7 @@ you shouldn't be thinking about cache lines.
 ## See also:
 - [Mechanical Sympathy — Part 1: The Principles and Why They Matter](https://www.linkedin.com/pulse/mechanical-sympathy-part-1-between-insight-rabbit-holes-marek-kubis-a8xle/)
 - [Mechanical Sympathy — Part 2: What Really Matters from CPU tiles/boards to LLM Systems](https://www.linkedin.com/pulse/mechanical-sympathy-part-2-what-really-matters-from-cpu-marek-kubis-yim4e/)
-- [Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve Optimization](https://www.linkedin.com/pulse/mechanical-sympathy-part-4-ai-profiling-non-na%C3%AFve-marek-kubis-bub0e)
+- [Mechanical Sympathy — Part 4: AI, Profiling, and Non-Naïve optimisation](https://www.linkedin.com/pulse/mechanical-sympathy-part-4-ai-profiling-non-na%C3%AFve-marek-kubis-bub0e)
 - [Mechanical Sympathy — Part 5: Mechanical Sympathy — Part 5: AI and Architectural Decisions Where the Most Expensive Mistakes Are Made and Continuous Optimisation](https://www.linkedin.com/pulse/mechanical-sympathy-part-5-ai-architectural-decisions-marek-kubis-6nbae)
 - [Down the rabbit holes of AI-based software development process ](https://www.linkedin.com/pulse/down-rabbit-holes-ai-based-software-development-process-marek-kubis-fsyue)
 - [Is there a need to change the way software is developed today?](https://www.linkedin.com/pulse/need-change-way-software-developed-today-marek-kubis-dntie)

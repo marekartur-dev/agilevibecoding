@@ -3,7 +3,7 @@
 > In Part 3, we explored where engineers fall into rabbit holes.
 > Now we focus on how to work correctly before optimising — especially in the age of AI-assisted development.
 
-<img src="./../Images/Mechanical_sympathy_and_AI_optimization.png" alt="Non-Naive optimistaion" width="600"  style="float: right; margin-left: 10px;">
+<img src="./../Images/Mechanical_sympathy_and_AI_optimisation.png" alt="Non-Naive optimistaion" width="600"  style="float: right; margin-left: 10px;">
 
 ```
 Optimisation Priority Pyramid
