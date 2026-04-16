@@ -2,7 +2,7 @@
 
 > A while ago, Nacho Coll and I met to discuss the Agile Vibe Coding Manifesto and principles. [Here's what we agreed on.](https://agilevibecoding.org/)
 
-<img src="./../Images/Kermit_Piggy_Muppet.png" alt="Agile and Agile Vibe Coding in practise" width="600"  style="float: right; margin-left: 10px;">
+<img src="./../Images/Kermit_Piggy_Animal.png" alt="Agile and Agile Vibe Coding in practise" width="600"  style="float: right; margin-left: 10px;">
 
 We didn't argue because we were, and are, in agreement about what's important in software engineering, including AI-based engineering.
 
