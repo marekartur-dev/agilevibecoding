@@ -1079,7 +1079,7 @@ Importance: ⚠️ Situational
     }
 ```
 
-## optimise SQL database queries and improve performance
+## Optimise SQL database queries and improve performance
 ```
 Priority: 2 — Data Access & I/O
 Importance: ✅ Common
