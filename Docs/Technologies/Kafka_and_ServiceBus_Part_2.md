@@ -11,7 +11,7 @@ which is shifting the development process from coding to orchestration and confi
 AI-driven development increases the importance of clear architectural boundaries (e.g., Kafka vs Service Bus), 
 because systems are increasingly composed rather than coded.
 
-Application Requirements Document (ARD) design becomes crucial in this context, and I deliberately included 
+> Application Requirements Document (ARD) design becomes crucial in this context, and I deliberately included 
 selected design elements that were coding-ready but also served as guides for AI prompts.  
 
 **Mental model for each example:**
@@ -274,7 +274,7 @@ Order Processing Real-time Analytics / Fraud Detection
 - Transaction stream (all sales events)
 - Fraud detection pipelines
 - Real-time dashboards
-- Customer behavior tracking
+- Customer behaviour tracking
 
 ### Scaling
 
@@ -491,7 +491,7 @@ Service Bus
 
 ## Pattern we should notice
 
-When Service Bus dominates
+When Service Bus dominates:
 - Lower throughput (< ~20k msg/sec)
 - Simpler operations preferred
 - Strong reliability needed
@@ -499,7 +499,7 @@ When Service Bus dominates
 - Moderate scale
 - Fewer consumers
 
-When Kafka becomes necessary
+When Kafka becomes necessary:
 - High throughput (> ~50k msg/sec)
 - Continuous event streams
 - Events must be replayed

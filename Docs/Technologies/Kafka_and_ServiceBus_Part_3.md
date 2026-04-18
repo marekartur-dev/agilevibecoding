@@ -1,7 +1,5 @@
 # Kafka & Service Bus — Part 3: An Integration
 
-<img src="./../Images/Epic_battle_for_intelligence_supremacy.png" alt="Epic battle for event-driven & AI supremacy" width="600"  style="float: right; margin-left: 10px;">
-
 > In Part 1, we compared Kafka and Service Bus from a technical perspective.
 > In Part 2, we looked at real-world business systems and how these technologies fit into their architectures.
 > In Part 3, we’ll explore how to integrate these two platforms effectively in a hybrid architecture,
@@ -10,6 +8,8 @@
 > The goal is to create a seamless data flow that allows us to use Service Bus for reliable command processing and Kafka for scalable event streaming and analytics.
 > The goal is also to design an architecture that can be developed with AI support and evolve over time, starting with Service Bus and introducing Kafka as needed, 
 > without the need for a major overhaul.
+
+<img src="./../Images/Epic_battle_for_intelligence_supremacy.png" alt="Epic battle for event-driven & AI supremacy" width="600"  style="float: right; margin-left: 10px;">
 
 ## Integration patterns
 
@@ -104,7 +104,6 @@ dotnet add package Confluent.Kafka
 Analytics      Kafka → SB Bridge
 / ML                ↓
                Workflow triggers
-
 ```
 
 > Implementation components: we need 3 services

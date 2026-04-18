@@ -33,12 +33,15 @@ Service Bus = delivery system for tasks
 > - Think about Service Bus as a **“task distribution / command handling”**.
 
 ```
-┌----------------------------------------------------┬------------------------------------------------------------------┐
-| Kafka is an event streaming platform:              | Service Bus is a message broker:                                 |
-|- Stores events as a durable log                    | - Messages are processed and removed                             |
-|- Consumers pull and replay events anytime          | - Consumers receive and complete messages                        |
-|- Designed for high-throughput, real-time streams   | - Designed for reliable enterprise messaging                     |
-└----------------------------------------------------┴------------------------------------------------------------------┘
+┌--------------------------------------┬---------------------------------┐
+| Kafka is an event streaming platform:| Service Bus is a message broker:|
+|- Stores events as a durable log      | - Messages are processed and    |
+|                                      |   removed                       |
+|- Consumers pull and replay events    | - Consumers receive and complete|
+|  anytime                             |   messages                      |
+|- Designed for high-throughput,       | - Designed for reliable         |
+|  real-time streams                   |   enterprise messaging          |
+└--------------------------------------┴---------------------------------┘
 ```
 
 ### Event-driven implementation differences
@@ -47,54 +50,62 @@ Service Bus = delivery system for tasks
 > - Service Bus: ```Producer → Queue/Topic → Consumer → Complete/Delete```
 
 ```
-┌----------------------------------------------------┬------------------------------------------------------------------┐
-| Kafka model:                                       | Service Bus model:                                               |
-|- Producer writes event → topic                     | - Producer sends message → queue/topic                           |
-|- Event stays in topic (retention: hours → forever) | - Message is delivered → processed → completed (removed)         |
-|- Multiple consumers read independently             | - Competing consumers (queue) OR pub/sub (topic + subscriptions) |
-|- Consumers track their own offset                  |                                                                  |
-|----------------------------------------------------|------------------------------------------------------------------|
-| Key implications:                                  | Key implications:                                                |
-|- Event replay = built-in                           | - No natural replay (unless you build it)                        |
-|- Multiple consumers = easy                         | - Strong delivery guarantees                                     |
-|- Loose coupling = very high                        | - More “workflow-oriented”                                       |
-└----------------------------------------------------┴------------------------------------------------------------------┘
+┌-----------------------------------┬------------------------------------┐
+| Kafka model:                      | Service Bus model:                 |
+|- Producer writes event → topic    |- Producer sends message →          |
+|- Event stays in topic             |   queue/topic                      |
+|  (retention: hours → forever)     |- Message is delivered → processed  |
+|- Multiple consumers read          |   → completed (removed)            |
+|  independently                    |- Competing consumers (queue) OR    |
+|- Consumers track their own offset |   pub/sub (topic + subscriptions)  |
+|-----------------------------------|------------------------------------|
+| Key implications:                 | Key implications:                  |
+|- Event replay = built-in          |- No natural replay                 |
+|                                   |    (unless you build it)           |
+|- Multiple consumers = easy        |- Strong delivery guarantees        |
+|- Loose coupling = very high       |- More “workflow-oriented”          |
+└-----------------------------------┴------------------------------------┘
 ```
 
-### Heavy-load behavior (this is where they diverge sharply)
+### Heavy-load behaviour (this is where they diverge sharply)
 
-> - **Kafka shines here.**
+> - **Kafka shines here.** 
 > - The service bus handles workload differently than Kafka.
 
 ```
-┌----------------------------------------------------┬------------------------------------------------------------------┐
-| Kafka under heavy load:                            | Service Bus under heavy load:                                    |
-|----------------------------------------------------|------------------------------------------------------------------|
-| Strengths:                                         | Strengths:                                                       |
-| - Sequential disk writes (very fast)               | - Reliable delivery (at-least-once)                              |
-| - Partitioning → horizontal scaling                | - Built-in retries, dead-letter queues                           |
-| - Consumers scale independently                    | - Transaction support                                            |
-|                                                    |                                                                  |
-| Real numbers (typical):                            | Limits:                                                          |
-| - Millions of messages/sec possible                | - Throughput is lower than Kafka                                 |
-| - Handles TBs of data easily                       | - Scaling is more constrained (tier-based)                       |
-|                                                    | - Latency increases under very high load                         |
-|                                                    |                                                                  |
-| Scaling model                                      | Scaling model:                                                   |
-| - Add partitions → increase parallelism            | - Premium tier (dedicated resources)                             |
-| - Add consumers → scale reads                      | - Messaging units                                                |
-|                                                    | - .. but not as horizontally elastic as Kafka                    |
-└----------------------------------------------------┴------------------------------------------------------------------┘
+┌------------------------------------┬-----------------------------------┐
+| Kafka under heavy load:            | Service Bus under heavy load:     |
+|------------------------------------|-----------------------------------|
+| Strengths:                         | Strengths:                        |
+| - Sequential disk writes, very fast| - Reliable delivery, at-least-once|
+| - Partitioning → horizontal scaling| - Built-in retries,               |
+| - Consumers scale independently    |   dead-letter queues              |
+|                                    | - Transaction support             |
+|                                    |                                   |
+| Real numbers (typical):            | Limits:                           |
+| - Millions of messages/sec possible| - Throughput is lower than Kafka  |
+| - Handles TBs of data easily       | - Scaling is more constrained     |
+|                                    |   (tier-based)                    |
+|                                    | - Latency increases under         |
+|                                    |   very high load                  |
+|                                    |                                   |
+| Scaling model                      | Scaling model:                    |
+| - Add partitions                   | - Premium tier,dedicated resources|
+|    → increase parallelism          | - Messaging units, but ..         |
+| - Add consumers → scale reads      | - not as horizontally elastic     |
+|                                    |   as Kafka                        |
+└------------------------------------┴-----------------------------------┘
 ```
 
 ### Ordering & partitioning
 
 ```
-┌-----------------------------------------┬------------------------------------┐
-| Kafka:                                  | Service Bus:                       |
-|- Ordering guaranteed within a partition | - Ordering via sessions            |
-|- We control partitioning via keys       | - More complex to manage at scale  |
-└-----------------------------------------┴------------------------------------┘
+┌-----------------------------------------┬------------------------------┐
+| Kafka:                                  | Service Bus:                 |
+|- Ordering guaranteed within a partition | - Ordering via sessions      |
+|- We control partitioning via keys       | - More complex to manage     |
+|                                         |   at scale                   |
+└-----------------------------------------┴------------------------------┘
 ```
 
 > - Kafka: ```Key = "customer-123" // ensures order per customer```
@@ -106,16 +117,18 @@ Service Bus = delivery system for tasks
 > - **Service Bus does not support replay natively**; messages are removed after processing.
   
 ```
-┌-----------------------------------------┬---------------------------------------------------┐
-| Kafka:                                  | Service Bus:                                      |
-| - Replay events anytime (log retention) | - Messages are removed after completion           |
-| - Consumers control offsets             | - Replay requires external storage or duplication |
-|                                         |                                                   |
-| Perfect for:                            | Replay requires:                                  |
-|- Event sourcing                         | - Custom storage                                  |
-|- Rebuilding state                       | - Dead-letter tricks                              |
-|- Debugging                              | - Or duplication                                  |
-└-----------------------------------------┴---------------------------------------------------┘
+┌-----------------------------------------┬------------------------------┐
+| Kafka:                                  | Service Bus:                 |
+| - Replay events anytime                 | - Messages are removed       |
+|   (log retention)                       |   after completion           |
+| - Consumers control offsets             | - Replay requires external   |
+|                                         |   storage or duplication     |
+|                                         |                              |
+| Perfect for:                            | Replay requires:             |
+|- Event sourcing                         | - Custom storage             |
+|- Rebuilding state                       | - Dead-letter tricks         |
+|- Debugging                              | - Or duplication             |
+└-----------------------------------------┴------------------------------┘
 ```
 
 > 👉 Huge architectural difference
@@ -134,7 +147,7 @@ Warning:
 - Exactly-once semantics in Kafka are possible but require careful configuration (idempotent producers, transactions) and are not trivial to achieve in practice.
 - Exactly-once semantics in Service Bus are not natively supported; we must implement idempotency at the consumer level to achieve similar results (at-least-once with deduplication support).
 
-### Latency vs throughput tradeoff
+### Latency vs throughput trade-off
 ```
 Feature			Kafka		Service Bus
 ---------------------------------------------------------
@@ -175,14 +188,18 @@ Under heavy load:	stays fast	stays safe
 > Most systems don’t need Apache Kafka — until they really do.
 
 ```
-┌-------------------------------------------------------------┬-------------------------------------------┐
-| ✔️ We NEED Kafka if:                                        | ❌ Don’t DON’T need Kafka if:             |
-|-------------------------------------------------------------|-------------------------------------------|
-| We expect > 50k–100k messages/sec sustained	              | We’re doing business workflows / commands |
-| We need event replay (event sourcing, audit rebuild)        | Load is moderate (< 20k msg/sec)          |
-| Multiple systems must consume the same events independently | We don’t need replay                      |
-| We’re building analytics / streaming pipelines              | We want simpler ops (huge factor)         |
-└-------------------------------------------------------------┴-------------------------------------------┘
+┌-----------------------------------┬------------------------------------┐
+| ✔️ We NEED Kafka if:              | ❌ Don’t DON’T need Kafka if:     |
+|-----------------------------------|------------------------------------|
+| We expect > 50k–100k messages/sec | We’re doing business               |
+|  sustained                        |  workflows / commands              |
+| We need event replay              | Load is moderate (< 20k msg/sec)   |
+|  (event sourcing, audit rebuild)  |                                    |
+| Multiple systems must consume     | We don’t need replay               |
+|  the same events independently    |                                    |
+| We’re building analytics          | We want simpler ops (huge factor)  |
+|  / streaming pipelines            |                                    |
+└-----------------------------------┴------------------------------------┘
 ```
 
 > **👉 If you're unsure, start with Service Bus. Add Kafka later.**
@@ -210,12 +227,11 @@ Under heavy load:	stays fast	stays safe
 - Enable max concurrency
 - Use batch processing
 
-```
 Example:
-
+```csharp
 [Function("ProcessEvents")]
-public async Task Run(
-    [ServiceBusTrigger("orders", IsBatched = true)] ServiceBusReceivedMessage[] messages)
+public async Task Run([ServiceBusTrigger("orders", IsBatched = true)]
+                      ServiceBusReceivedMessage[] messages)
 {
     foreach (var msg in messages)
     {
@@ -229,21 +245,21 @@ public async Task Run(
 2) Service Bus scaling - _critical tuning_
 - Premium tier
 - Partitioned queues/topics
-- Scale via: Messaging Units (MU)
+- Scale via: **Messaging Units (MU)**
 - Rough capability: `~1,000–2,000 msg/sec per Messaging Unit (workload-dependent)`
 
 3) Kubernetes consumer scaling
 
-- Horizontal Pod Autoscaler (HPA)
+- Horizontal Pod Autoscaler (**HPA**)
 - Increase replicas based on CPU/memory or custom metrics: `replicas: 10 → 100+`
 - Optimize processing logic for parallelism
 ```
 await Task.WhenAll(messages.Select(msg => Process(msg)));
 ```
 > [!WARNING]
-> Instruction `Parallel.ForEach` does NOT support async properly`.
-> Limit the number of concurrent operations if needed to avoid overwhelming downstream systems. 
-> [Example](https://www.linkedin.com/pulse/mechanical-sympathy-part-3-suggestions-avoiding-software-marek-kubis-vybbe/) or [SemaphoreSlim](https://docs.microsoft.com/en-us/dotnet/api/system.threading.semaphoreslim) can help.
+> - Instruction `Parallel.ForEach` does NOT support async properly.
+> - Limit the number of concurrent operations if needed to avoid overwhelming downstream systems. 
+>   [Example](https://www.linkedin.com/pulse/mechanical-sympathy-part-3-suggestions-avoiding-software-marek-kubis-vybbe/) or [SemaphoreSlim](https://docs.microsoft.com/en-us/dotnet/api/system.threading.semaphoreslim) can help.
 
 ### Advantages of the proposed solution
 
@@ -385,7 +401,7 @@ Service Bus (Queue/Topic)
 Kubernetes (.NET consumers)
 ```
 
-> In the next article from the series, I’ll present realistic numbers based on production experience to understand when Kafka becomes necessary and when Service Bus is sufficient.
+_In the next article from the series, I’ll present realistic numbers based on production experience to understand when Kafka becomes necessary and when Service Bus is sufficient._
 
 ## See also:
 - [Kafka vs Service Bus Part 2: Real-world Architectures](./Kafka_and_ServiceBus_Part_2.md)
