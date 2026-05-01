@@ -14,7 +14,7 @@
 - Thread placement matters again
 - CPU behaves like a distributed system
 
-> [NOTE]: On mainstream desktops **OS schedulers still handle most cases well** and **NUMA penalties are usually not dominant**.
+> [!NOTE]: On mainstream desktops **OS schedulers still handle most cases well** and **NUMA penalties are usually not dominant**.
 > ..in high-core-count or heterogeneous CPUs, this may start to matter…
 
 👉 Example: `Thread A (Board 0) → accessing Board 1 memory → slower`
@@ -240,7 +240,7 @@ But:
 - Reduces maintainability, readability, and scalability
 - Gains often negligible vs algorithmic improvements
 
-> [NOTE]: Different parallel constructs provide different trade-offs…
+> [!NOTE]: Different parallel constructs provide different trade-offs…
 
 #### Advanced: thread affinity (important again)
 
