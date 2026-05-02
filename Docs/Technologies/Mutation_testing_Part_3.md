@@ -509,7 +509,7 @@ With this mindset, we can only test what already exists. What is missing remains
 
 In such cases, developers validate the implementation, but not necessarily the intended behaviour.
 
-Experienced engineers will recognize that this aligns with approaches such as behaviour-Driven Development and Domain-Driven Design.
+Experienced engineers will recognize that this aligns with approaches such as Behaviour-Driven Development and Domain-Driven Design.
 
 The key idea is simple:
 - define expected behaviour first
