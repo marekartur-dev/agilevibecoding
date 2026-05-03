@@ -29,6 +29,7 @@ Service Bus = delivery system for tasks
 
 ## Core mindset
 
+> [!IMPORTANT]
 > - Think about Kafka as a **“source of truth for events”**.
 > - Think about Service Bus as a **“task distribution / command handling”**.
 
@@ -46,6 +47,7 @@ Service Bus = delivery system for tasks
 
 ### Event-driven implementation differences
 
+> [!NOTE]
 > - Kafka: ```Producer → Topic (log) → Consumers (pull & replay)```
 > - Service Bus: ```Producer → Queue/Topic → Consumer → Complete/Delete```
 
@@ -69,6 +71,7 @@ Service Bus = delivery system for tasks
 
 ### Heavy-load behaviour (this is where they diverge sharply)
 
+> [!TIP]
 > - **Kafka shines here.** 
 > - The service bus handles workload differently than Kafka.
 
@@ -108,11 +111,13 @@ Service Bus = delivery system for tasks
 └-----------------------------------------┴------------------------------┘
 ```
 
+> [!NOTE]
 > - Kafka: ```Key = "customer-123" // ensures order per customer```
 > - **Kafka = simpler + more scalable ordering**
 
 ### Replay & event sourcing
 
+> [!IMPORTANT]
 > - **Kafka supports event replay natively** via its log-based storage model.
 > - **Service Bus does not support replay natively**; messages are removed after processing.
   
@@ -131,15 +136,16 @@ Service Bus = delivery system for tasks
 └-----------------------------------------┴------------------------------┘
 ```
 
-> 👉 Huge architectural difference
+> [!NOTE]
+> Kafka & Service Bus - huge architectural difference
 
 ### Delivery guarantees
 ```
-Feature		Kafka		    Service Bus
+Feature		    Kafka		    Service Bus
 -----------------------------------------------
-At least once	✔️		    ✔️
+At least once	✔️		        ✔️
 Exactly once	✔️ (complex)	    ❌ (not native)
-Transactions	✔️		    ✔️
+Transactions	✔️		        ✔️
 Dead-lettering	✔️ (pattern-based)   ✔️ built-in
 ```
 Warning:
@@ -149,7 +155,7 @@ Warning:
 
 ### Latency vs throughput trade-off
 ```
-Feature			Kafka		Service Bus
+Feature			    Kafka		Service Bus
 ---------------------------------------------------------
 Optimized for:		throughput	reliability & correctness
 Under heavy load:	stays fast	stays safe
@@ -170,6 +176,7 @@ Under heavy load:	stays fast	stays safe
 └-------------------------------┴-----------------------------------┘
 ```
 
+> [!IMPORTANT]
 > - Kafka pattern:       ```Microservices → Kafka → Stream processing → Analytics / DB```
 > - Service Bus pattern: ```API → Queue → Worker → Database```
 
@@ -185,6 +192,7 @@ Under heavy load:	stays fast	stays safe
 
 ### Do we even need Kafka? - Reality Check
 
+> [!TIP]
 > Most systems don’t need Apache Kafka — until they really do.
 
 ```
@@ -202,6 +210,7 @@ Under heavy load:	stays fast	stays safe
 └-----------------------------------┴------------------------------------┘
 ```
 
+> [!NOTE]
 > **👉 If you're unsure, start with Service Bus. Add Kafka later.**
 
 

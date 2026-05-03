@@ -539,19 +539,19 @@ if (AlreadyProcessed(message.Id)) return;
 
 ## Final comparison across example systems
 ``` 
-System	Messaging backbone
+System	                Messaging backbone
 -----------------------------------------------
-eCommerce	Service Bus
-MRP/ERP	Hybrid
-Warehouse (small)	Service Bus
-Warehouse (large)	Hybrid
+eCommerce	            Service Bus
+MRP/ERP	                Hybrid
+Warehouse (small)	    Service Bus
+Warehouse (large)	    Hybrid
 Retail network (small)	Service Bus
 Retail network (large)	Hybrid
-Hospital (small)	Service Bus
-Hospital (large)	Hybrid
-Motorway	Kafka
-Airport (small)	Service Bus
-Airport (large)	Hybrid
+Hospital (small)	    Service Bus
+Hospital (large)	    Hybrid
+Motorway	            Kafka
+Airport (small)	        Service Bus
+Airport (large)	        Hybrid
 ``` 
 
 - Service Bus = reliability + workflows
@@ -561,7 +561,9 @@ Airport (large)	Hybrid
 
 ## Practical takeaway
 
-> Kafka optimises throughput; Service Bus optimises reliability and latency consistency.
+> [!IMPORTANT]
+> Kafka optimises throughput; 
+> Service Bus optimises reliability and latency consistency.
 
 **⚖️ Simple rule of thumb**
 ```

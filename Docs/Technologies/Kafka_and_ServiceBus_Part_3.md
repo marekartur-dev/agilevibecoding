@@ -19,18 +19,21 @@ Producer writes to:
 - Service Bus (commands)
 - Kafka (events)
 
+> [!TIP]
 > 👉 Fast, simple, but needs idempotency
 
 ### ✅ Pattern B — Service Bus → Kafka bridge
 - Commands enter Service Bus
 - Forwarded into Kafka for streaming
 
+> [!TIP]
 > 👉 Best when we already rely on Service Bus
 
 ### ✅ Pattern C — Kafka → Service Bus bridge
 - Kafka is source of truth
 - Selected events trigger workflows via Service Bus
 
+> [!TIP]
 > 👉 Best for event-driven platforms
 
 ### Reliability patterns 
@@ -42,7 +45,7 @@ if (await _store.Exists(event.Id))
     return;
 ```
 
-- **Outbox pattern **(CRITICAL for dual-write)
+- **Outbox pattern** (CRITICAL for dual-write)
 
 > Prevents message loss
 
@@ -63,6 +66,8 @@ Background Worker:
 ```
 
 - **Auto commit vs manual commit**
+
+> [!IMPORTANT]
 > Kafka consumers should use controlled offset commits (manual or transactional) to avoid message loss or duplication.
 
 ### Retry strategy
@@ -72,6 +77,7 @@ Background Worker:
 
 ### Recommendation 
 
+> [!TIP]
 > Use Pattern B or C depending on system ownership. 
 > Bi-directional integration should be used carefully to avoid feedback loops.
 
@@ -707,6 +713,7 @@ This integration is ideal when:
 - Smart infrastructure
 - Industrial IoT
 
+> [!IMPORTANT]
 > **Service Bus ensures work is done.**
 > 
 > **Kafka ensures data is never lost.**
