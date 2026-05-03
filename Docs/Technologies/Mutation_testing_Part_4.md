@@ -183,7 +183,7 @@ Workflow:
 
 ### LLM code is especially risky in:
 - Business rules (pricing, eligibility)
-- State machines (like your Stateless workflows)
+- State machines (like our Stateless workflows)
 - Data validation
 - Security checks
 
@@ -583,7 +583,7 @@ But not:
 ### Mutation Testing: our truth detector
 
 Mutation testing (e.g., with Stryker.NET) answers:
-> “Does your test suite actually understand your domain?”
+> “Does our test suite actually understand our domain?”
 
 This is where AI-generated code usually collapses.
 

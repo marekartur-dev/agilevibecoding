@@ -12,16 +12,16 @@ The Thoughtworks Technology report highlights several important aspects, but I w
 
 We should thank the report's authors for reminding us about this technique.
 
-Have you ever experienced the feeling that, while writing tests, something important might still be missing? And when, despite careful test design, the program produced unexpected errors—did that feeling grow?
+Have you ever experienced the feeling that, while writing tests, something important might still be missing? And when, despite careful test design, the program produced unexpected errors - did that feeling grow?
 
 So what kinds of errors can hide from unit, integration, system, acceptance, exploratory, manual, or automated tests?
 
-A confident Tech Lead might say that errors go undetected because tests are poorly written or not comprehensive enough—and recommend relearning testing fundamentals. That’s partly true, but not the whole story. 
+A confident Tech Lead might say that errors go undetected because tests are poorly written or not comprehensive enough - and recommend relearning testing fundamentals. That’s partly true, but not the whole story. 
 It’s worth revisiting a technique developed alongside the foundations of modern software engineering.
 
-Much has changed since 1971, when Richard Lipton published “Mutant Testing of Programs.” It’s no surprise that mutation testing has been overshadowed by other techniques rather than continuously refined.
+Much has changed since 1971, when Richard Lipton published “Mutant Testing of Programs”. It’s no surprise that mutation testing has been overshadowed by other techniques rather than continuously refined.
 
->Since there is no perfect solution, it is worth rediscovering mutation testing and adding it to our engineering toolbox.
+> Since there is no perfect solution, it is worth rediscovering mutation testing and adding it to our engineering toolbox.
 
 
 ## What are mutation tests designed to detect?

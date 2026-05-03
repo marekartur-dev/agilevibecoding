@@ -781,7 +781,7 @@ Open the HTML report and scan for survived mutants. Pay special attention to:
 - guard conditions
 - state transitions
 
-### Common patterns you’ll find
+### Common patterns we’ll find
 - Missing boundary tests
 - Missing state combinations
 - Weak assertions (tests pass for the wrong reason)
