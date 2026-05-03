@@ -129,10 +129,12 @@ Focus on:
 
 3) Use mutation testing as a quality gate
 
+> [!IMPORTANT]
 > Run Stryker.NET and ask: **“What mistakes could exist that my tests wouldn’t catch?”**
 
 4) Focus on specification completeness
 
+> [!IMPORTANT]
 > Verify the code, because LLMs often implement a solution, but **not the correct solution**.
 
 Mutation testing helps verify:
@@ -215,6 +217,7 @@ If system uses LLMs, not just generates code:
 - output constraints
 - failure modes
 
+> [!WARNING]
 > Mutation idea here becomes: **“What if the model output is slightly wrong?”**
 
 Example:
@@ -325,6 +328,7 @@ We created a loop:
 
 `LLM code → tests → mutation testing → AI fixes tests → stronger tests`
 
+> [!NOTE]
 > This is **far more robust** than: “LLM writes code + tests and we trust it”
 
 
@@ -552,10 +556,12 @@ Looks fine, but:
 - What if payment arrives before creation?
 - What if duplicated?
 
+> [!TIP]
 > These are **mutation testing goldmines** and where AI fails silently.
 
 ### State Machines
 
+> [!TIP]
 > State machines are the best control mechanism and our strongest defense against AI drift.
 
 Define transitions explicitly:
@@ -567,7 +573,7 @@ Define transitions explicitly:
         .Permit(Event.Ship, State.Shipped);
 ``` 
 
-> Now **AI cannot “invent” **transitions - it **must comply**.
+> Now **AI cannot “invent”** transitions - it **must comply**.
 
 **Key rule**:
 - The state machine definition must be **human-authored and immutable**
@@ -585,7 +591,7 @@ But not:
 Mutation testing (e.g., with Stryker.NET) answers:
 > “Does our test suite actually understand our domain?”
 
-This is where AI-generated code usually collapses.
+_This is where AI-generated code usually collapses._
 
 #### What mutation testing exposes in AI code?
 
@@ -597,6 +603,7 @@ This is where AI-generated code usually collapses.
     + if (!order.IsPaid) throw ...
 ``` 
 
+> [!IMPORTANT]
 > If tests still pass → our **domain rules are fake**.
 
 2) Weak event handling
@@ -607,6 +614,7 @@ This is where AI-generated code usually collapses.
     + // removed
 ``` 
 
+> [!IMPORTANT]
 > If tests pass → our events are **not verified**.
 
 3) Broken state transitions
@@ -617,6 +625,7 @@ This is where AI-generated code usually collapses.
     + Permit(Pay, Pending)
 ``` 
 
+> [!IMPORTANT]
 > If tests pass → our  state machine is **not actually tested**.
 
 #### Required mutation coverage areas
@@ -639,6 +648,7 @@ We must target:
 
 #### Specification-style tests (critical)
 
+> [!TIP]
 > Instead of testing methods, **test business rules**:
 
 ```csharp
@@ -671,6 +681,7 @@ Explicitly test:
     Pending	    Ship	❌ Fail
 ``` 
 
+> [!NOTE]
 > AI will never generate this fully - developer must.
 
 ### Pipeline integration (CI/CD)
@@ -682,7 +693,7 @@ In our Azure DevOps pipeline:
   - Mutation score < threshold (e.g., 80–90%)
   - Surviving mutants in domain layer
 
-This is where architecture like Azure Function + Service Bus + Kubernetes becomes powerful:
+_This is where architecture like Azure Function + Service Bus + Kubernetes becomes powerful._
 - Mutation tests validate domain correctness
 - Integration tests validate event flow correctness
 
@@ -710,15 +721,19 @@ This is where architecture like Azure Function + Service Bus + Kubernetes become
 
 I will repeat it, even if it is already known.
 
-> LLM-generated code increases the risk of: “Looks correct, passes tests, but is subtly wrong”
-
-> Mutation testing directly targets that risk by asking: “Would our tests catch realistic mistakes - even ones we didn’t think of?”
+> [!CAUTION]
+> LLM-generated code increases the risk of: **“Looks correct, passes tests, but is subtly wrong”**
+> 
+> Mutation testing directly targets that risk by asking: **“Would our tests catch realistic mistakes - even ones we didn’t think of?”**
 
 AI shifts our effort 
 - from: “Writing code”
 - to: “Defining truth and verifying it aggressively”
 
-> Mutation testing is not optional here - it’s the **only reliable way** to detect when AI has produced code that _looks right but means nothing_.
+
+> [!IMPORTANT]
+> Mutation testing is not optional here - it’s the **only reliable way** to detect when AI has produced code that ___looks right but means nothing___.
+
 
 **Finally, I can only encourage everyone: Developers + Testers + DevOps, strengthen your collaboration, because AI poses new, difficult challenges for software engineering.**
 
