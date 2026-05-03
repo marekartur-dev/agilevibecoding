@@ -240,7 +240,8 @@ But:
 - Reduces maintainability, readability, and scalability
 - Gains often negligible vs algorithmic improvements
 
-> [!NOTE]: Different parallel constructs provide different trade-offs…
+> [!NOTE]
+> Different parallel constructs provide different trade-offs…
 
 #### Advanced: thread affinity (important again)
 

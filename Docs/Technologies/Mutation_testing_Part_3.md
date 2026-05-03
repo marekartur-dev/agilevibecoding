@@ -36,6 +36,7 @@ What happens?
 - Mutation score drops unfairly
 - No real bug exists
 
+> [!NOTE]
 > **Conclusion**: Mutation testing sometimes measures syntactic difference, not semantic ones
 
 
@@ -65,7 +66,9 @@ Mutation testing result:
 
 Reality: **Business rule is wrong** ❌
 
+> [!IMPORTANT]
 > **Conclusion**: Mutation testing validates tests vs code, **not code vs requirements**
+
 In both cases, the observable behaviour of the unit tests remains the same.
 
 
@@ -79,7 +82,9 @@ Mutation testing:
 - Can’t mutate what isn’t exercised
 - Reports everything “fine”
 
+> [!IMPORTANT]
 > **Conclusion**: Mutation testing cannot detect missing behaviours.
+
 Again, the observable behaviour of the unit tests remains unchanged.
 
 
@@ -93,6 +98,7 @@ Bad test:
 
 👉 The test kills mutants, but it does not validate meaningful business logic.
 
+> [!WARNING]
 > **Conclusion**: We can “game” mutation testing without improving quality.
 
 
@@ -112,6 +118,7 @@ individually.
 
 But the bug might depend on a specific combination (e.g., A=true, B=false, C=true, D=false).
 
+> [!NOTE]
 > **Conclusion**: Coupling Effect is not perfect - interactions matter.
 
 
@@ -284,8 +291,8 @@ Formal methods	Critical invariants
 
 ### A non-obvious question
 
-> Is there a real bug that mutation testing misses - but property-based testing catches?
-Yes.
+> [!TIP]
+> Is there a real bug that mutation testing misses - but property-based testing catches? **YES**
 
 ## Example: order state machine bug
 
@@ -389,6 +396,8 @@ IsPaid && IsInStock
 ```
 
 **Result**: Tests fail → mutant killed ✅
+
+> [!WARNING]
 > Mutation score looks good ❗ But…
 > 
 > The real bug: _**IsAddressValid** is ignored_.
@@ -398,8 +407,9 @@ Mutation testing:
 - only mutates existing ones
 
 💥 This is the key limitation. As we saw in counterexample 3:
+> [!IMPORTANT]
 > **Mutation testing cannot detect missing logic**
-
+> 
 > **Conclusion**: bug survives undetected ❌
 
 
@@ -456,6 +466,7 @@ Actual: true
 ``` 
 → Failure `IsAddressValid = false` detected ✅ 
 
+> [!IMPORTANT]
 > **Conclusion**: 💥 TEST FAILS → bug found ✅
 
 ### Side-by-side
@@ -503,7 +514,7 @@ This means for tested systems that:
 
 Moreover, by analyzing software testing from multiple perspectives, we can also see a fundamental flaw in the commonly used approach:
 
-> “Let’s write the program first—and then test it.”
+> “Let’s write the program first - and then test it.”
 
 With this mindset, we can only test what already exists. What is missing remains invisible—and missing logic is often **the most dangerous class of bugs**.
 
@@ -532,7 +543,8 @@ The most dangerous bugs
 - but: “missing logic”
 
 And:
-> Mutation testing won’t save us from those - property-based testing will.
+> [!IMPORTANT]
+> Mutation testing won’t save us from “missing logic” - property-based testing will.
 
 
 _In the next article in the series, I'll cover an AI/LLM area._

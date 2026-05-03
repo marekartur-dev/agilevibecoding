@@ -46,7 +46,7 @@ and not:
 And if so, even minor changes (mutants), such as `&& → ||`, are sufficient to conduct testing. These small mutations resemble real bugs, so
 - if our tests detect mutants, they will likely also detect serious logical or computational errors.
 - if they don't, our tests are weak,
-- if the test suite detects a change (i.e., one of the tests fails), then the mutant is said to have been eliminated.
+- if the test suite detects a change (i.e. one of the tests fails), then the mutant is said to have been eliminated.
 
 Re: **CEH** is based on the idea that simple faults can cascade or combine to form other, emergent faults. 
 - Because higher-order mutants also reveal subtle and significant errors, further supporting the linkage effect. 
@@ -104,9 +104,9 @@ In human case, it forces the question: **“Did you test the exact boundary?”*
 ### Trade-offs
 
 <pre><code>	
-Approach	Strength	Weakness
+Approach	        Strength	                    Weakness
 ------------------------------------------------------------------------------
-Many unit tests	Fast, simple	Can miss important cases
+Many unit tests	    Fast, simple	                Can miss important cases
 Mutation testing	Validates test effectiveness	Slower, more compute-heavy
 </code></pre>
 
@@ -162,7 +162,7 @@ ___Do you agree that it looks decent?___
 + if purchase_amount > 100:
 ```
 
-Result? → **Survives! → Why? → We never tested exactly 100.**
+Result? → **Survives!** → Why? → We never tested exactly 100.
 
 #### Mutant 2: wrong discount for VIP low spend
 
@@ -171,7 +171,7 @@ Result? → **Survives! → Why? → We never tested exactly 100.**
 + return 0.0
 ```
 
-Result? → **Survives! → Why? → We never tested VIP with <100.**
+Result? → **Survives!** → Why? → We never tested VIP with <100.
 
 #### Mutant 3: wrong user type condition
 
@@ -182,6 +182,7 @@ Result? → **Survives! → Why? → We never tested VIP with <100.**
 
 Result? → **Might partially survive depending on coverage.**
 
+> [!CAUTION]
 > **If our tests don’t strongly distinguish behaviours, this can slip through.**
 
 ### What mutation testing reveals?
@@ -232,6 +233,7 @@ But in real code:
 - Logic branches multiply quickly.
 - Humans systematically miss combinations.
 
+> [!CAUTION]
 > Mutation testing exposes: **“We tested values — but not behaviours across dimensions”**.
 
 In the example with `calculate_discount`, we can test a few random amounts (50, 150).
@@ -239,6 +241,7 @@ But is very easy to miss:
 - boundary (100),
 - combinations (`VIP` vs `Regular` at each level).
 
+> [!WARNING]
 > Mutation testing ensures we **don’t just test the inputs** …but instead: **the correctness of decision logic**
 
 ### A practical way to use mutation testing
@@ -306,12 +309,13 @@ This looks good:
 ```
 Case	balance	amount	Result (original)	Result (mutant)
 -----------------------------------------------------------
-Test 1	200	100	True	True
-Test 2	50	100	False	False
-Test 3	200	100	False (unverified)	False
+Test 1	200	    100	    True	            True
+Test 2	50	    100	    False	            False
+Test 3	200	    100	    False (unverified)	False
 ```
 
-> **The bug is completely invisible**.
+> [!CAUTION]
+> **The bug is completely invisible!**
 
 - Now imagine a real user:
 
@@ -369,6 +373,7 @@ In real systems:
 
 The value isn’t that mutation testing finds new bugs directly. It reveals: 
 
+> [!WARNING]
 > **Our tests are not sensitive to certain classes of bugs**
 
 That’s much more powerful.
@@ -529,6 +534,7 @@ Result? → `Paid` state is no longer allowed to ship → do unit tests catch it
 State = OrderState.Paid
 ```
 
+> [!WARNING]
 > Mutation testing reveals: **“We tested one valid state, but not all valid states”**.
 
 
@@ -628,6 +634,7 @@ In complex logic like this, humans tend to:
 - Miss **valid alternatives**
 - Miss **invalid combinations**
 
+> [!TIP]
 > Mutation testing forces us to think in terms of:
 > 
 > **“What must never break, even under small code changes?”**

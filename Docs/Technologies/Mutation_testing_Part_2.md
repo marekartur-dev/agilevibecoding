@@ -132,6 +132,7 @@ Using Stryker.NET, we introduce small changes (mutants) and observe whether test
 Why?
 The failure test (`IsPaid = false`) fails _before_ the address condition is evaluated.
 
+> [!WARNING]
 > The test passes  -  but not for the reason we think.
 
 
@@ -332,6 +333,7 @@ Publish results:
 
 ### 3) Performance strategy (critical)
 
+> [!TIP]
 > Mutation testing is computationally expensive.
 >
 > **Recommended approaches:**
@@ -381,6 +383,7 @@ Thresholds meaning:
 - 60–80% → acceptable
 - <50% → fail pipeline
 
+> [!NOTE]
 > **100% mutation score is not a realistic goal**.
 
 ### 5) What NOT to mutate
@@ -407,9 +410,6 @@ Thresholds meaning:
 #### ✅ Do this instead:
 - Establish a baseline
 - Fail only if the score drops
-
-> This enforces: **“Don’t make test quality worse.”**
-
 
 ### What do teams actually gain?
 
@@ -458,6 +458,7 @@ For instance 2: business invariants ..
 
 ## Structuring the repository for mutation testing
 
+> [!IMPORTANT]
 > To make mutation testing sustainable, repository structure matters. Without clear boundaries, mutation testing becomes slow, noisy, and difficult to maintain.
 
 Below is a practical structure aligned with domain-driven design and event-driven architecture.
@@ -600,6 +601,7 @@ If:
 - score improves or stays → ✅ pass
 
 This enforces a simple rule:
+> [!IMPORTANT]
 > “**Don’t make test quality worse.**”
 
 ### Example (Azure DevOps script)
@@ -660,6 +662,7 @@ fi
 
 ### Keeping the pipeline fast (critical in practice)
 
+> [!NOTE]
 > Mutation testing can take minutes or hours. 
 
 If not controlled, it will:
@@ -763,6 +766,7 @@ Draft → Ship (should fail)
 ```
 - Guard permutations
 
+> [!TIP]
 > Instead of `IsPaid = false` test all combinations:
 
 ```csharp
@@ -796,7 +800,7 @@ Mature	70–85%
 Critical domain	80%+
 </code></pre>
 
-< [!NOTE]
+> [!NOTE]
 > 100% mutation score is not worth the cost.
 
 ### Final architecture recommendation
@@ -828,6 +832,7 @@ When applied correctly in architectures built on:
 - distributed workflows
 
 …it becomes:
+> [!IMPORTANT]
 > **A safeguard for behavioural correctness - not just test coverage.**
 
 
