@@ -4,7 +4,7 @@
 
 
 > [!IMPORTANT]
-> More and more companies are realizing that the software development approach established many years ago — and still widely used —
+> More and more companies are realising that the software development approach established many years ago — and still widely used —
 > is causing increasing problems for both development teams and businesses.
 
 > [!WARNING]
@@ -190,5 +190,11 @@ Organizational change should follow an iterative approach:
    - improve it feature by feature.
 
 
-   
-[Agile Vibe Coding Manifesto](https://agilevibecoding.org/)
+## See also:
+- [Is There a Need to Change the Way Software Is Developed Today? – Continuation]()
+
+- [Agile Vibe Coding Manifesto](https://agilevibecoding.org/)
+- [Principles Behind the Agile Vibe Coding Manifesto - extended version](https://github.com/marekartur-dev/agilevibecoding/blob/main/Docs/Home/Principles.md)
+
+- [Agile Vibe Coding](https://www.reddit.com/r/AgileVibeCoding/)
+- [Marek Kubis - blog](https://github.com/marekartur-dev/agilevibecoding/tree/main)   

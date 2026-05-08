@@ -1,4 +1,4 @@
-# Mutation testing - Part 4: mutation testing and LLM-written code.
+# Mutation testing - Part 4: mutation testing and LLM-written code
 
 <img src="./../Images/Mutation_testing_LLM_diagram.png" alt="Mutation testing and LLM-written code diagram" width="800"  style="float: right; margin-left: 10px;">
 
