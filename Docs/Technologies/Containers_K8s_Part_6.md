@@ -1,6 +1,6 @@
 # Why containers, Docker and Kubernetes are a bad idea? - Part 6: Kubernetes Costs and When Kubernetes Is Justified
 
-<img src="./../Images/Over_budget_again.png" alt="Containers & K8s - costs" width="400"  style="float: right; margin-left: 10px;">
+<img src="./../Images/Kubernetes_Abracadabra.png" alt="Containers & K8s - costs" width="800"  style="float: right; margin-left: 10px;">
 
 _In Parts 1, 2, 3, 4, and 5, we covered the technical and operational aspects of Kubernetes adoption._
 _In Part 6, we'll discuss scenarios where Kubernetes may be justified and the real costs involved._
