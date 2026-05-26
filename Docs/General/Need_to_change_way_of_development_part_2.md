@@ -25,7 +25,7 @@ That is exactly why many _“Agile”_ organisations still behave structurally l
 Large companies will likely recognise this problem because both _Agile_ and _Waterfall_ are still in use. However, for small companies that rely entirely on _Agile_, 
 it may take far too long to discover that current software development problems stem from implementing flawed business assumptions. 
 
-**Once implemented, Agile keeps software developers constantly busy in the SDLC cycle and prioritises fixing what's urgent over what's important. **
+**Once implemented, Agile keeps software developers constantly busy in the SDLC cycle and prioritises fixing what's urgent over what's important.** 
 Changing business assumptions is much more difficult for a small or medium-sized company than for a large company. 
 
 ### The Missing Loop in Agile
