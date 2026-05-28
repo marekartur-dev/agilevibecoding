@@ -1,4 +1,4 @@
-# Underestimated and Annoying, that is "The Dirty Dozen" of programmers - Part 4: II. Human Problems
+# Underestimated and Annoying, that is "The Dirty Dozen" of Programmers - Part 4: II. Human Problems
 
 <img src="./../Images/Our_problems.png" alt="The Dirty Dozen of human problems" width="600"  style="float: right; margin-left: 10px">
 
