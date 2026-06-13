@@ -185,7 +185,7 @@ Monolith debugging `stack trace`.
 
 Kubernetes debugging:
 - distributed tracing
-- centralized logging
+- centralised logging
 - metrics correlation
 - container logs
 - pod restarts

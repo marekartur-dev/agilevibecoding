@@ -228,7 +228,7 @@ Organisations respond to AI chaos by adding:
 
 The company becomes:
 - operationally rigid,
-- politically centralized,
+- politically centralised,
 - architecturally slow.
 
 ### AVC Counter-Principles

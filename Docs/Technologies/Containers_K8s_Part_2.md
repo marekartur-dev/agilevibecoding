@@ -26,7 +26,7 @@ A) Vertical Layers: K8 pods on K8-engine, Docker Container/s on DockerEngine wra
 
 B) Horizontal Layers: Istio, Promethius, Grafana, Load Balancer, API-Gateway as a "Single Entry-point"; 
    a bottleneck which introduces measurable latency of "Distributed Architecture", 
-   a along with 7-layers of OSI based Network Layers (HTTP2 "with HoL Block" issue) around each Container, merely to pass data to a peer Container, even if it run on the same machine. 
+   a along with 7-layers of OSI based Network Layers (HTTP2 "with High(er) Order Language, HoL Block" issue) around each Container, merely to pass data to a peer Container, even if it run on the same machine. 
 	
 > Above critique is not irrational. It is actually a very important systems-engineering perspective.
 
@@ -56,7 +56,7 @@ They are a massive tax.
 
 ## Question 1: When does the “slow image copying mechanism” matter?
 
-Mostly:
+👉 Mostly:
 - startup time
 - cold-start latency
 - deployment churn
@@ -72,8 +72,8 @@ A Docker container is usually:
 - using layered filesystems.
 
 The “image-copying” criticism mainly refers to:
-- OverlayFS
-- AUFS
+- Overlay FS - an overlay file system attempts to represent a file system that is the result of overlaying one file system on top of another.
+- Another Union Filesystem, AUFS
 - layered copy-on-write filesystems
 - image pulls from registries
 
@@ -85,7 +85,7 @@ This impacts:
 
 ### When it matters a lot
 
-1) High-churn systems
+**1) High-churn systems**
 
 If pods constantly restart:
 - autoscaling
@@ -94,7 +94,7 @@ If pods constantly restart:
 
 then image pull/startup time matters greatly.
 
-2) Serverless/container cold starts
+**2) Serverless/container cold starts**
 
 Especially:
 - huge container images
@@ -103,11 +103,20 @@ Especially:
 
 > Cold starts become painful.
 
-3) High-performance IO systems
+**3) High-performance IO systems**
 
 Overlay filesystems are slower than:
-- direct ext4/xfs access
+- direct Ext4/XFS access
 - raw host filesystem access
+
+Why? Because:
+- Ext4, the Fourth Extended File System, is the evolutionary successor to the file systems on which Linux is built. 
+  Ext4 solved most of the problems with backups and hours-long filesystem checks after reboots.
+- Ext4 introduced extensions, a more efficient way of tracking file data, which significantly improved performance and reduced fragmentation, 
+  ultimately putting it on par with XFS in many tasks.
+- XFS was designed from the ground up for Linux to store data at a petabyte scale, a scale that remains impressive today.
+- The XFS architecture is designed with parallelisation in mind: by dividing a disk into allocation groups, 
+  XFS can handle multiple operations at once, making it an excellent solution for multi-core and multi-disk systems.
 
 This matters in:
 - databases
@@ -126,7 +135,7 @@ Then the image-copying overhead is often negligible.
 
 ## Question 2: Do layers really add latency and reduce throughput?
 
-**Yes. Absolutely. This is physics.**
+**👉 Yes. Absolutely. This is physics.**
 
 Every layer introduces:
 - context switches
@@ -186,7 +195,7 @@ But **this does NOT automatically mean “bad”**.  We are trading _efficiency_
 
 ## Question 3: Do horizontal and vertical layers have to be high operational overhead layers?
 
-**No.** This is where many organisations fail.
+**👉 No.** This is where many organisations fail.
 
 ### Thin-stack architecture exists
 
@@ -221,7 +230,7 @@ until **the platform becomes more complex than the business domain**.
 
 ## Question 4: Are vertical layers and patterns like Saga/Circuit Breaker wrong?
 
-**No.** But they are often misapplied.
+**👉 No.** But they are often misapplied.
 
 This is a crucial distinction.
 
@@ -265,7 +274,7 @@ then **the architecture itself may be the problem**.
 
 ## Question 5: Are Istio, Prometheus, Grafana, API Gateways can become architectural bottlenecks?
 
-**No**. But they are often:
+**👉 No**. But they are often:
 - overused
 -prematurely adopted
 - badly operated
@@ -303,7 +312,7 @@ Observability is necessary once systems become distributed.
 
 Not inherently evil. But:
 - central bottlenecks
-- over-centralized auth
+- over-centralised auth
 - massive routing layers
 - costly to operate at scale
 
@@ -326,7 +335,7 @@ must exist somewhere.
 
 _This is one of the strongest criticisms of microservices._
 
-Yes:
+👉 Yes:
 - remote calls are expensive
 - network stacks are expensive
 - serialization is expensive
@@ -349,11 +358,11 @@ Our point is technically valid.
 Although HTTP/2 improved multiplexing, TCP-level head-of-line blocking still exists.
 
 Modern systems increasingly use:
-- QUIC
+- Quick UDP (User Datagram Protocol) Internet Connections, QUIC
 - HTTP/3
-- gRPC
+- Google Remote Procedure Call, gRPC
 - kernel bypass
-- eBPF optimizations
+- English Blackball Pool Federation, eBPF optimizations
 
 to reduce these costs.
 
@@ -376,7 +385,7 @@ instead of: _shared memory_ or: _function call_.
 
 This is the most important question.
 
-**There is no single alternative.**
+**👉 There is no single alternative.**
 
 The correct architecture depends on:
 - scale
@@ -419,8 +428,8 @@ while retaining some deployment independence.
 
 Instead of Kubernetes:
 - Docker Compose
-- ECS
-- Nomad
+- Elastic Container Service, ECS
+- Nomad, a simple and flexible workload orchestration tool that makes it easy to deploy, manage, and scale different types of workloads across multiple regions and cloud platforms
 - systemd
 - Azure App Service
 - PaaS platforms.
