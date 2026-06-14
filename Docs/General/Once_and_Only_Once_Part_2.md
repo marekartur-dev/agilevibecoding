@@ -28,7 +28,7 @@ Many teams ask AI:
 
 This produces code-level duplication.
 
-Instead ask:
+Ask instead:
 
 ```
     What bounded contexts exist?
@@ -60,7 +60,7 @@ Good candidates:
 ```
 
 - **Infrastructure**
-```csharp
+```text
     Azure Service Bus setup
     Terraform
     Bicep
@@ -95,7 +95,7 @@ Consider:
 
 **Example**:
 
-Developer defines:
+- Developer defines:
 
 ```
     Draft
@@ -105,7 +105,7 @@ Developer defines:
     Completed
 ```
 
-AI generates:
+- AI generates:
 
 ```
     public enum OrderState
@@ -167,7 +167,7 @@ Prompt:
     Generate registration endpoint.
 ```
 
--> AI generates another validation.
+**-> AI generates another validation.**
 
 > [!WARNING]
 > ❗️ Now there are two versions.
@@ -195,15 +195,16 @@ Prompt:
     }
 ```
 
--> All generated code references it.
+**-> All generated code references it.**
 
 ### AI-Friendly Architecture
 
-_AI performs much better when architecture is explicit._
+> [!NOTE]
+> 📌 AI performs much better when architecture is explicit.
 
 **Example**:
 
-```csharp
+```text
 project folder:
 
     src/
@@ -258,7 +259,7 @@ AI-generated code calls:
 > [!NOTE]
 > 📌 The workflow remains centralised.
 
-This aligns closely with our interest in .NET Worker Services and the Stateless state machine framework.
+**This aligns closely with our interest in .NET Worker Services and the Stateless state machine framework.**
 
 > [!IMPORTANT]
 > 👉 We ought to prompt AI to generate state machines for complex processes, and then call them from generated code.
@@ -320,9 +321,7 @@ Example ADR:
 ```
 
 > [!IMPORTANT]
-> 👉 AI receives the ADR as context.
-
-Generated code becomes consistent.
+> 👉 AI receives the ADR as context. Generated code becomes consistent.
 
 ### A Pattern Emerging in 2026
 
@@ -392,8 +391,11 @@ For example:
 > [!NOTE]
 > 📌 The architecture and process ownership stay centralised, while AI accelerates implementation.
 
-This minimises both traditional code duplication and a newer problem that is becoming increasingly common: 
-AI-generated architectural duplication, where multiple services independently implement the same business decision because the AI was never given a clear ownership model.
+**This minimises both traditional code duplication and a newer problem that is becoming increasingly common.**
+
+> [!IMPORTANT]
+> 📌 AI-generated architectural duplication, where multiple services independently implement
+> the same business decision because ownership was never made explicit to the AI.
 
 
 ## The New Form of Duplication
@@ -434,7 +436,7 @@ _Imagine a trading platform._
 > [!NOTE]
 > 📌 Business rule: _Premium customers receive real-time market data_.
 
-Team asks:
+Now:
 
 ```
 Developer asks AI:
@@ -447,7 +449,7 @@ AI produces:
     }
 ```
 
-Six months later team asks:
+Six months later:
 
 ```
 Developer asks AI:
@@ -508,13 +510,13 @@ AI is used separately for:
 - Worker generation
 
 After six months:
-- API validates 50k
-- Function validates 50k
-- Worker validates 50k
-- Reporting validates 50k
-- Regulation changes: `50k → 25k`
+- API enforces 50k
+- Function enforces 50k
+- Worker enforces 50k
+- Reporting enforces 50k
+.. and changes in regulations and the introduction of a new business rule: `£50k → £25k`.
 
-Developers now have duplicated code:
+❌ Developers now have duplicated code:
 - 4 implementations
 - 4 deployments
 - 4 regression cycles
@@ -523,7 +525,7 @@ Developers now have duplicated code:
 > [!WARNING]
 > ❗️ Now the issue is not code duplication → **the issue is duplicated ownership**.
 
-### Example 3: Azure Operational
+### Example 3: Azure Operational Consistency
 
 _Consider Azure pipeline._
 
@@ -574,11 +576,11 @@ Retry Policy Example:
 
 ```
     Team A prompt
-
+        ↓
     AI generates solution
 
     Team B prompt
-
+        ↓
     AI generates solution
 ```
 
@@ -614,21 +616,21 @@ This is why many organisations observe:
 ### Convergent Duplication
 
 > [!NOTE]
-> 📌 Historically, duplication usually resulted from copy-paste → With AI, duplication can emerge independently.
+> 📌 Historically, duplication usually resulted from copy-paste → **With AI, duplication can emerge independently**.
 
 
 - **With AI**:
 
 ```
-    Team A prompt: Generate customer A
+    Team A prompt: Generate customer onboarding API
         ↓
     AI generates solution
 
-    Team B prompt: Generate customer B
+    Team B prompt: Generate customer registration workflow
         ↓
     AI generates solution
 
-    Team C prompt: Generate customer validation 
+    Team C prompt: Generate customer validation service
         ↓
     AI generates solution
 ```
@@ -642,7 +644,7 @@ Therefore:
 - No shared repository
 
 > [!IMPORTANT]
-> ❗️ yet duplication still appears.
+> ❗️ Yet duplication still appears.
 
 > [!IMPORTANT]
 > 👉 Multiple teams can ask similar prompts and receive similar implementations without any direct communication.
@@ -665,7 +667,7 @@ Prompt 2:
     Generate fraud evaluation.
 
 Prompt 3:
-    Generate AML screening.
+    Generate Anti-Money Laundering, AML screening.
 ```
 
 > [!IMPORTANT]
@@ -734,11 +736,20 @@ As a result:
 
 ## Building a Real Domain Knowledge Layer
 
-- 📌 The solution is not fine-tuning.
-- ❗️ Most organisations immediately jump to: _let's train our own model_.
-- ❌ Usually wrong.
-- ✔  The model already knows programming.
-- ❗️ The model does not know the organisation being modelled.
+> [!NOTE]
+>  ✔  The solution is not fine-tuning.
+
+> [!NOTE]
+> ❗️ Most organisations immediately jump to: _let's train our own model_.
+
+> [!IMPORTANT]
+> ❌ **Usually wrong.**
+
+> [!NOTE]
+> 📌 The model already knows programming.
+ 
+> [!IMPORTANT]
+> ❗️ The model does not know the organisation being modelled.
 
 A better architecture:
 
@@ -758,26 +769,18 @@ Domain concepts:
 
 ```
     Policy
-
     Claim
-
     Coverage
-
     Premium
-
     Deductible
-
     Create an explicit ontology:
-
-    Coverage
+    - Coverage
         owns
             eligibility rules
-
-    Claim
+    - Claim
         owns
             settlement rules
-
-    Premium
+    - Premium
         owns
             pricing rules
 ```
@@ -851,16 +854,16 @@ Context automatically injects:
     ADR-15
 
     Order ownership:
-    Order Domain
+        Order Domain
 
     Pricing ownership:
-    Pricing Domain
+        Pricing Domain
 
     Customer ownership:
-    Customer Domain
+        Customer Domain
 
     Forbidden:
-    Cross-domain calculations
+        Cross-domain calculations
 ```
 
 > [!NOTE]
@@ -897,9 +900,31 @@ Where generation policies look like:
 - Never validate compliance outside Compliance Domain.
 - Never publish events without schema registry approval.
 
+### AI Creates "Abstraction Debt"
+
+Historically:
+- developers over-abstracted
+
+Today:
+- developers under-abstract
+- because AI can instantly generate another implementation
+
+Example:
+
+```text
+    Why create a reusable pricing engine?
+
+    AI can generate another pricing service in 10 seconds.
+
+    → Until pricing exists in 12 places.
+```
+
+> [!NOTE]
+> ✔ We could call this __Abstraction Debt__ or __Deferred Abstraction Debt__
+
 ### Architectural Entropy
 
-AI accelerates architectural entropy.
+**AI accelerates architectural entropy.**
 
 Every independent prompt can create:
 - another interpretation
@@ -955,6 +980,44 @@ to:
 ```
 
 > [!NOTE]
-> 📌 In that world, the most valuable asset is no longer the codebase itself. It is the curated, explicit representation of organisational knowledge, 
-> ownership boundaries, architectural decisions, and domain semantics that continuously guide AI generation 
+> 📌 In that world, **the most valuable asset** is no longer the codebase itself. It **is the curated, explicit representation of organisational knowledge,** 
+> **ownership boundaries, architectural decisions, and domain semantics** that continuously guide AI generation 
 > and prevent the silent explosion of duplicated business decisions across hundreds of services, workflows, reports, and AI-generated components.
+
+_...tbc..._
+
+## See also:
+- [Once and Only Once with Examples - Part 1: Is It Obvious?](https://www.linkedin.com/pulse/once-only-examples-part-1-obvious-marek-kubis-nyebe/)
+
+- [Underestimated and Annoying, or the "Dirty Dozen" of Programmers - Part 1: The Problem Space](https://www.linkedin.com/pulse/underestimated-annoying-dirty-dozen-programmers-marek-kubis-mcfxe)
+- [Underestimated and Annoying, that is "The Dirty Dozen" of Programmers - Part 2: AI-Generated Software](https://www.linkedin.com/pulse/underestimated-annoying-dirty-dozen-programmers-part-2-marek-kubis-tqkme/)
+- [Underestimated and Annoying, that is "The Dirty Dozen" of Programmers - Part 3: I. Organizational Problems](https://www.linkedin.com/pulse/underestimated-annoying-dirty-dozen-programmers-part-marek-kubis-h9y3e/)
+- [Underestimated and Annoying, that is "The Dirty Dozen" of Programmers - Part 4: II. Human Problems](https://www.linkedin.com/pulse/underestimated-annoying-dirty-dozen-programmers-part-marek-kubis-mn5ve/)
+- [Underestimated and Annoying, that is "The Dirty Dozen" of Programmers - Part 5: III. Process Problems](https://www.linkedin.com/pulse/underestimated-annoying-dirty-dozen-vibe-coding-part-marek-kubis-83jre/)
+- [Underestimated and Annoying, that is "The Dirty Dozen" of Programmers - Part 6: IV. Architecture Problems](https://www.linkedin.com/pulse/underestimated-annoying-dirty-dozen-programmers-part-marek-kubis-remze/)
+- [Underestimated and Annoying, that is "The Dirty Dozen" of Programmers - Part 7: V. Validation Problems](https://www.linkedin.com/pulse/underestimated-annoying-dirty-dozen-programmers-part-marek-kubis-dqk2e/)
+- [Underestimated and Annoying, that is "The Dirty Dozen" of Programmers - Part 8: VI. Economic Problems](https://www.linkedin.com/pulse/underestimated-annoying-dirty-dozen-programmers-part-marek-kubis-7bb6e/)
+
+- [Murphy’s law and more in AI time - one by one with examples](https://www.linkedin.com/pulse/murphys-law-more-ai-time-one-examples-marek-kubis-fkaze)
+- [The Agile Vibe Coding and Conway's Law](https://www.linkedin.com/pulse/agile-vibe-coding-conways-law-marek-kubis-m0wpe)
+- [Using a digital banking solution to prove Conway’s Law in AI-Driven engineering - example 1](https://www.linkedin.com/pulse/using-digital-banking-solution-prove-conways-law-ai-driven-kubis-xqlre/)
+- [Using a .NET 10 migration project to prove Conway’s Law in AI-Driven engineering - example 2](https://www.linkedin.com/pulse/using-net-10-migration-project-prove-conways-law-ai-driven-kubis-abqae)
+
+- [Where traditional Agile breaks in AI-driven systems](https://www.linkedin.com/pulse/where-traditional-agile-breaks-ai-driven-systems-marek-kubis-4wq6e/)
+- [AI - It seems nobody has it fully figured out yet](https://www.linkedin.com/pulse/ai-nobody-has-figured-out-marek-kubis-bkyge)
+- [Internal Development Platform and Agile Vibe Coding](https://www.linkedin.com/pulse/internal-development-platform-agile-vibe-coding-marek-kubis-kyhqe/?trackingId=5w3lWKp%2F0BLUpwNdrSmAcg%3D%3D&lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3BqH%2FwqbkZRkmo%2Fagtxvqyrw%3D%3D)
+- [Everyone will be vibe coders](https://www.linkedin.com/pulse/everyone-vibe-coders-marek-kubis-tlgze)
+- [The Structural problems AI introduces into the SDLC](https://www.linkedin.com/pulse/structural-problems-ai-introduces-sdlc-marek-kubis-qyt6e)
+- [Signals That Reveal the True Maturity of Organisations Claiming “AI-Driven Development”](https://www.linkedin.com/pulse/signals-reveal-true-maturity-organisations-claiming-ai-driven-kubis-urule)
+
+- [Agile Vibe Coding positioning and if this works, what changes?](https://www.linkedin.com/pulse/agile-vibe-coding-positioning-works-what-changes-marek-kubis-r4ate)
+- [Agile Vibe Coding – Ceremony Modes](https://www.linkedin.com/pulse/agile-vibe-coding-ceremony-modes-marek-kubis-meq9e)
+- [Agile Vibe Coding ceremonies approach compared to a simple one-prompt-per-task approach](https://www.linkedin.com/pulse/agile-vibe-coding-ceremonies-approach-compared-simple-marek-kubis-ecx5e)
+- [Agile Vibe Coding Maturity Model](https://www.linkedin.com/pulse/agile-vibe-coding-maturity-model-marek-kubis-bbtqe)
+- [The Agile Vibe Coding - the 4-level adaptive ceremony system](https://www.linkedin.com/pulse/agile-vibe-coding-4-level-adaptive-ceremony-system-marek-kubis-jizke)
+
+- [Agile Vibe Coding Manifesto](https://agilevibecoding.org/)
+- [Principles Behind the Agile Vibe Coding Manifesto - extended version](https://github.com/marekartur-dev/agilevibecoding/blob/main/Docs/Home/Principles.md)
+
+- [Agile Vibe Coding](https://www.reddit.com/r/AgileVibeCoding/)
+- [Marek Kubis - blog](https://github.com/marekartur-dev/agilevibecoding/tree/main)
